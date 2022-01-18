@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400&display=swap');
+
+:root{
+    --primary-font: 'Public Sans', sans-serif;
+    --heading-font:'Encode Sans', sans-serif;
+    --primary-black:#2B282A;
+    --secondary-black:#42444e;
+    --primary-white:#fff;
+    --secondary-white:#a1a2a7;
+}
