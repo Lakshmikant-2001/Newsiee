@@ -1,7 +1,115 @@
 *,
 *::before,
-*::after{
+*::after {
     padding: 0;
-    margin:0;
+    margin: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: var(--primary-font);
+}
+
+input,a{
+    color:inherit;
+    background-color:inherit;
+    font:inherit;
+}   
+
+/* header-styles */
+#header {
+    background-color:var(--primary-black);
+    color:var(--primary-white);
+    font-size: 1.3rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 .5rem 0 .8rem;
+}
+
+#search-div, .ham-holder{
+    width: 20%;
+}
+
+#header-title {
+    font-family: var(--heading-font);
+    width: auto;
+    text-align: center;
+    font-size: 2rem;
+    margin:0 1rem;
+    padding:.3rem 0 .5rem;  
+}
+
+#header-title::first-letter{
+    background-image: url(https://wwpknightlynews.files.wordpress.com/2014/08/depositphotos_13732950-stock-photo-background-of-old-vintage-newspapers.jpg);
+    -webkit-background-clip: text;
+    font-size:2.6rem;
+    color:#ffffff80;
+}
+
+#search-div{
+    min-width: 350px;
+    display:flex;
+    align-items: center;
+    background-color:var(--secondary-black);
+    border-radius: .3rem;
+}
+
+#search-icon{
+    width: 30px;
+    margin:0.5rem;
+    filter: brightness(.8);
+}
+
+#search-inp-fld{
+    overflow: hidden;
+    flex-grow: 1;
+    border:none;
+    padding:0 .8rem;
+    border-left:2px dashed var(--secondary-white);
+}
+
+#search-inp-fld::placeholder{
+    color: #ffffff80;
+}
+
+#search-inp-fld:focus{
+    outline:none;
+}
+
+#ham-btn{
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: .5rem;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#ham-btn > span{
+    width: 23px;
+    height: 2px;
+    margin:.14rem;
+    background-color:var(--primary-white);
+    border-radius: 2rem  2rem 0 0;
+    box-shadow: 1px 1px 2px var(--secondary-white);
+}
+
+#ham-btn > span:first-of-type{
+    transform: skewY(2deg);
+}
+
+#ham-btn > span:last-of-type{
+    transform: skewY(2deg);
+}
+
+#ham-btn > span:nth-of-type(2){
+    transform: skewY(-2deg);
+    background-color: #bbbbc0;
+}
+
+#ham-btn:hover{
+    background-color: #ffffff10;
 }
