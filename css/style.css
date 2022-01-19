@@ -297,6 +297,17 @@ a {
     overflow: hidden;
     padding-top:1rem;
     box-shadow: 1px 1px 6px #11111130;
+    transition: transform .3s linear;
+    transform-origin: left;
+}
+
+.open{
+    transform:rotateY(180deg);
+
+}
+
+.close{
+    transform:rotateY(0deg);
 }
 
 #side-nav ul {
