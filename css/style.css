@@ -12,7 +12,7 @@ body {
     /* background:#222; */
 }
 
-input, a, li {
+input, a, li, button {
     color: inherit;
     background-color: inherit;
     font: inherit;
@@ -131,7 +131,7 @@ a {
 
 #main {
     margin: 100px 0;
-    --secondary-black: #0f0f0f70;   
+    --secondary-black: #1e1d1e;
 }
 
 /* news card styles */
@@ -147,12 +147,16 @@ a {
 
 .news-card-holder {
     margin: 2rem 3rem;
+    perspective: 1000;
 }
 
 .news-card {
     width: 400px;
+    height: 370px;
     position: relative;
     box-shadow: 4px 2px 10px #11111190, -1px 0 2px #11111130;
+    transform-style: preserve-3d;
+    transition: transform .75s linear;
 }
 
 .bg-cut {
@@ -203,6 +207,14 @@ a {
     background-color: var(--primary-black);
 }
 
+.news-front-side, .news-back-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .news-img {
     width: 100%;
     z-index: 1;
@@ -211,4 +223,51 @@ a {
 .news-headlines {
     padding: 1.5rem 2rem;
     z-index: 1;
+}
+
+.news-back-side {
+    transform: rotateY(180deg);
+    background-color: var(--secondary-black);
+    backface-visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+}
+
+.news-back-side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 60%;
+    width: 400px;
+    height: 400px;
+    background-color: var(--primary-black);
+    transform: rotate(45deg);
+    z-index: -1;
+    box-shadow: inset 3px 2px 10px #111;
+}
+
+.news-des {
+    height: 75%;
+    width: 100%;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.news-des::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+.view-btn {
+    width: max-content;
+    padding: .5rem 2.2rem;
+    border-radius: 1rem;
+    background-color: #ffffff20;
+    border: unset;
+    cursor: pointer;
+}
+
+.news-card-holder:hover .news-card {
+    transform: rotateY(180deg);
 }
