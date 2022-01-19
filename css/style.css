@@ -144,7 +144,6 @@ a {
     flex-direction: column;
     font-size: 1.2rem;
     line-height: 2rem;
-    overflow: hidden;
     border-bottom: 1px dashed #11111125;
 }
 
@@ -179,6 +178,8 @@ a {
 
 .news-card-wrapper {
     display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 .news-card-holder {
