@@ -23,15 +23,15 @@ function wordPicker() {
     }
 }
 
-function checkTtlTopics(){
-    if(totalTopics.length != 3){
-        setTimeout(()=> {
-        wordPicker();
-
-        },1200)
+function checkTtlTopics() {
+    if (totalTopics.length != 3) {
+        setTimeout(() => {
+            wordPicker();
+        }, 1200)
     }
-    else{
-         console.log(totalTopics);
+    else {
+        console.log(totalTopics);
+        imgErroFix()
     }
 }
 
@@ -86,3 +86,12 @@ function createCards(data, sectionId) {
         currentNewsCardWrapper.innerHTML += newsCard(newsSource, newsSourceTitle, newsImg, newsHeadlines, newsSummary, newsLink);
     });
 };
+
+function imgErroFix() {
+    const newsImages = document.querySelectorAll(".news-img");
+    newsImages.forEach(img => {
+        img.addEventListener("error", () => {
+            img.setAttribute("src", `./assets/news-cover-img.jpg`);
+        })
+    })
+}
