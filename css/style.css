@@ -246,6 +246,7 @@ a {
     display: flex;
     flex-direction: column;
     background-color: var(--primary-black);
+    padding-bottom:1.5rem;
 }
 
 .news-front-side::before {
@@ -267,8 +268,11 @@ a {
 }
 
 .news-headlines {
-    padding: 1.5rem 1rem 1.5rem;
-    margin-left: 10%;
+    padding: 1.5rem 1rem 0;
+    margin:0 1.5rem 0 10%;
+    flex-grow: 1;
+    text-overflow:ellipsis;
+    overflow: hidden;
 }
 
 .news-back-side {
@@ -296,6 +300,7 @@ a {
 .news-des {
     height: 75%;
     width: 100%;
+    word-wrap: break-word;
     overflow-y: auto;
     margin-bottom: 1.5rem;
     word-spacing: .2rem;
