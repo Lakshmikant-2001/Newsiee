@@ -1,5 +1,7 @@
 const arrows = document.querySelectorAll(".arrow-div svg");
 const newsCardHolder = document.querySelector(".news-card-holder");
+const marginWidth = window.getComputedStyle(newsCardHolder).marginRight.replace(/\D/g, '');
+const cardWidth = newsCardHolder.offsetWidth;
 
 arrows.forEach(arrow => {
     arrow.addEventListener("click", (e) => {
@@ -7,13 +9,11 @@ arrows.forEach(arrow => {
         const dataId = parentElement.dataset.id;
         const targetClass = e.currentTarget.classList;
         const newsCardWrapper = document.querySelector(`#${dataId} > .news-card-wrapper`);
-        console.log(newsCardWrapper);
-        console.log(targetClass.value)
         if (targetClass == "left-arrow") {
-            newsCardWrapper.scrollLeft -= 200;
+            newsCardWrapper.scrollLeft -= cardWidth + (+marginWidth)*2;
         }
         else {
-            newsCardWrapper.scrollLeft += 200;
+            newsCardWrapper.scrollLeft += cardWidth + (+marginWidth)*2;
         }
     })
 });

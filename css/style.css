@@ -136,7 +136,7 @@ a {
 
 /* news card styles */
 .topic-container, .topic-container > *{
-    margin:1rem 0;
+    /* margin:1rem 0; */
 }
 
 .topic-container {
@@ -145,6 +145,7 @@ a {
     font-size: 1.2rem;
     line-height: 2rem;
     border-bottom: 1px dashed #11111125;
+    padding:1.5rem 0;
 }
 
 .topic-heading {
@@ -163,6 +164,7 @@ a {
 }
 
 .arrow-div{
+    user-select: none;
     align-self: center;
 }
 
@@ -178,13 +180,13 @@ a {
 
 .news-card-wrapper {
     display: flex;
-    overflow: hidden;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
 .news-card-holder {
     color: var(--primary-white);
-    margin: 2rem 3rem;
+    margin:4rem 3rem;
     perspective: 1000px;
 }
 
@@ -338,12 +340,12 @@ a {
     transform-origin: left;
 }
 
-.open {
+.close {
     transform: rotateY(180deg);
 
 }
 
-.close {
+.open {
     transform: rotateY(0deg);
 }
 
