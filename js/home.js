@@ -1,16 +1,57 @@
 import { clickSlider } from "./slider.js";
-import { newsSection,newsCard } from "./template.js";
+import { newsSection, newsCard } from "./template.js";
 
 const main = document.querySelector("main");
+let topics = ["covid", "ozone", "tesla", "google", "meta"];
+let sessionWords = [], totalTopics = [];
 
-fetchNews("covid");
-setTimeout(() => {
-    fetchNews("ozone");
-}, 2000);
+window.onload = wordPicker();
 
+function randomWordGen() {
+    return topics[Math.floor(Math.random(topics) * topics.length)];
+}
+
+function wordPicker() {
+    const randomWord = randomWordGen();
+    if (sessionWords.includes(randomWord)) {
+        randomWordGen()
+        wordPicker()
+    }
+    else {
+        checkAvail(randomWord)
+        sessionWords.push(randomWord);
+    }
+}
+
+function checkTtlTopics(){
+    if(totalTopics.length != 3){
+        setTimeout(()=> {
+        wordPicker();
+
+        },1200)
+    }
+    else{
+         console.log(totalTopics);
+    }
+}
+
+async function checkAvail(randomWord) {
+    const result = await fetchNews(randomWord);
+    const isAvail = result[0];
+    const data = result[1];
+    if (!isAvail) {
+        wordPicker();
+    }
+    else {
+        createNewsSection(data, randomWord);
+        clickSlider();
+        totalTopics.push(randomWord);
+        checkTtlTopics()
+    }
+}
 
 async function fetchNews(randomWord) {
-    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q=${randomWord}&page_size=10`, {
+    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${randomWord}"&page_size=10`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "free-news.p.rapidapi.com",
@@ -18,13 +59,12 @@ async function fetchNews(randomWord) {
         }
     });
     const data = await response.json();
-    createNewsSection(data, randomWord);
-    clickSlider();
+    return [data.total_hits, data];
 }
 
 function createNewsSection(data, heading) {
     const sectionId = `topic-${heading}`;
-    main.innerHTML+= newsSection(heading,sectionId);
+    main.innerHTML += newsSection(heading, sectionId);
     createCards(data, sectionId);
 }
 
@@ -37,12 +77,12 @@ function createCards(data, sectionId) {
         let newsImg = article.media;
         const pattern = new RegExp(/.png/);
         const isPng = pattern.test(newsImg);
-        if(newsImg == null || isPng){
+        if (newsImg == null || isPng) {
             newsImg = "./assets/news-cover-img.jpg"
         }
         const newsHeadlines = article.title;
         const newsLink = article.link;
         const newsSummary = article.summary;
-        currentNewsCardWrapper.innerHTML += newsCard(newsSource,newsSourceTitle,newsImg,newsHeadlines,newsSummary,newsLink);
+        currentNewsCardWrapper.innerHTML += newsCard(newsSource, newsSourceTitle, newsImg, newsHeadlines, newsSummary, newsLink);
     });
 };
