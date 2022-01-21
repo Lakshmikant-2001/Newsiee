@@ -39,9 +39,32 @@
         </ul>
     </nav>
     <main id="main"></main>
+    <aside class="loader-div">
+        <div class="loader-cards-container">
+            <div style="transform: rotateX(180deg) ; animation-duration :1s;">
+                <div class="div-1"></div>
+                <div class="div-2"></div>
+            </div>
+            <div
+                style="transform: rotateY(180deg); animation-duration : .95s; background-color: var(--secondary-red); width: 50px; height: 50px;">
+                <div class="div-1"></div>
+                <div class="div-2"></div>
+            </div>
+            <div style="transform: rotateX(-180deg); animation-duration : 1s;">
+                <div class="div-1"></div>
+                <div class="div-2"></div>
+            </div>
+        </div>
+        <div>
+            <h2 class="heading">loading<span>...</span></h2>
+        </div>
+    </aside>
     <script src="./js/common.js"></script>
     <script src="./js/home.js" type="module"></script>
     <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
 </body>
 
 </html>
+
+
+
