@@ -2,37 +2,31 @@ import { clickSlider } from "./slider.js";
 import { newsSection, newsCard } from "./template.js";
 
 const main = document.querySelector("main");
-let topics = ["covid", "ozone", "tesla", "google", "meta"];
-let sessionWords = [], totalTopics = [];
+let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture","crypto"];
+let genWords = [], sessionTopics = [], noDataWords = [];
 
 window.onload = wordPicker();
 
-function randomWordGen() {
-    return topics[Math.floor(Math.random(topics) * topics.length)];
-}
-
 function wordPicker() {
     const randomWord = randomWordGen();
-    if (sessionWords.includes(randomWord)) {
-        randomWordGen()
+    if (noDataWords.includes(randomWord)) {
         wordPicker()
     }
-    else {
-        checkAvail(randomWord)
-        sessionWords.push(randomWord);
-    }
+    else
+        if (genWords.includes(randomWord)) {
+            randomWordGen()
+            wordPicker()
+        }
+        else {
+            setTimeout(() => {
+                checkAvail(randomWord);
+            }, 1200)
+            genWords.push(randomWord);
+        }
 }
 
-function checkTtlTopics() {
-    if (totalTopics.length != 3) {
-        setTimeout(() => {
-            wordPicker();
-        }, 1200)
-    }
-    else {
-        console.log(totalTopics);
-        imgErroFix()
-    }
+function randomWordGen() {
+    return topics[Math.floor(Math.random(topics) * topics.length)];
 }
 
 async function checkAvail(randomWord) {
@@ -41,17 +35,18 @@ async function checkAvail(randomWord) {
     const data = result[1];
     if (!isAvail) {
         wordPicker();
+        noDataWords.push(randomWord);
     }
     else {
         createNewsSection(data, randomWord);
         clickSlider();
-        totalTopics.push(randomWord);
+        sessionTopics.push(randomWord);
         checkTtlTopics()
     }
 }
 
 async function fetchNews(randomWord) {
-    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${randomWord}"&page_size=10`, {
+    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${randomWord}"&lang=en&page_size=10`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "free-news.p.rapidapi.com",
@@ -62,7 +57,19 @@ async function fetchNews(randomWord) {
     return [data.total_hits, data];
 }
 
+function checkTtlTopics() {
+    if(topics.length != genWords.length){
+        if (sessionTopics.length != 3) {
+            wordPicker();
+        }
+        else {
+            imgErroFix()
+        }         
+    }
+}
+
 function createNewsSection(data, heading) {
+    heading = heading.replace(/\s/g,"");
     const sectionId = `topic-${heading}`;
     main.innerHTML += newsSection(heading, sectionId);
     createCards(data, sectionId);
