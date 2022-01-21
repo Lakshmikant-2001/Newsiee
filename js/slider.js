@@ -1,10 +1,8 @@
 export function clickSlider() {
     const arrows = document.querySelectorAll(".arrow-div svg");
     const newsCardHolder = document.querySelector(".news-card-holder");
-    
     const marginWidth = window.getComputedStyle(newsCardHolder).marginRight.replace(/\D/g, '');
     const cardWidth = newsCardHolder.offsetWidth;
-
     arrows.forEach(arrow => {
         arrow.addEventListener("click", (e) => {
             const parentElement = e.currentTarget.parentElement;

@@ -1,11 +1,16 @@
 import { clickSlider } from "./slider.js";
 import { newsSection, newsCard } from "./template.js";
+import { addLoadingAnimation, removeLoadingAnimation } from "./loader.js";
 
 const main = document.querySelector("main");
-let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture","crypto"];
+const loaderDiv = document.querySelector(".loader-div");
+let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture", "crypto"];
 let genWords = [], sessionTopics = [], noDataWords = [];
 
-window.onload = wordPicker();
+window.onload = () => {
+    addLoadingAnimation(main, loaderDiv);
+    wordPicker();
+}
 
 function wordPicker() {
     const randomWord = randomWordGen();
@@ -39,7 +44,6 @@ async function checkAvail(randomWord) {
     }
     else {
         createNewsSection(data, randomWord);
-        clickSlider();
         sessionTopics.push(randomWord);
         checkTtlTopics()
     }
@@ -58,18 +62,20 @@ async function fetchNews(randomWord) {
 }
 
 function checkTtlTopics() {
-    if(topics.length != genWords.length){
+    if (topics.length != genWords.length) {
         if (sessionTopics.length != 3) {
             wordPicker();
         }
         else {
-            imgErroFix()
-        }         
+            imgErroFix();
+            removeLoadingAnimation(main, loaderDiv);
+            clickSlider();
+        }
     }
 }
 
 function createNewsSection(data, heading) {
-    heading = heading.replace(/\s/g,"");
+    heading = heading.replace(/\s/g, "");
     const sectionId = `topic-${heading}`;
     main.innerHTML += newsSection(heading, sectionId);
     createCards(data, sectionId);
