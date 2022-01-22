@@ -57,8 +57,8 @@ function checkTtlTopics() {
         }
         else {
             imgErroFix();
-            clickSlider();
             removeLoadingAnimation(main, loaderDiv);
+            clickSlider();
         }
     }
 }
