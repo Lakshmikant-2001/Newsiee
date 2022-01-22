@@ -8,7 +8,6 @@
 
 body {
     font-family: var(--primary-font);
-    min-height: 100vh;
 }
 
 input, a, li, button {
@@ -67,12 +66,26 @@ a {
     align-items: center;
     background-color: var(--secondary-black);
     border-radius: .3rem;
+    position: relative;
 }
 
-#search-icon {
+#search-icon,#inp-clear-btn {
     width: 30px;
     margin: 0.5rem;
     filter: brightness(.8);
+    cursor: pointer;
+    border-radius: .3rem;
+}
+
+#inp-clear-btn{
+    display: none;
+}
+
+#inp-clear-btn:focus{
+    outline:none;
+}
+#search-icon:hover,#inp-clear-btn:hover {
+    filter: brightness(1);
 }
 
 #search-inp-fld {
@@ -133,6 +146,7 @@ a {
     --secondary-black: #1e1d1e;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 /* news card styles */
@@ -457,4 +471,37 @@ a {
     50% {
         opacity: 1;
     }
+}
+
+.message{
+    color:var(--secondary-black);
+    font-weight: 600;
+    position: absolute;
+    top:100%;
+    width: 90%;
+    margin-top:2rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    display:none;
+}
+
+.message svg{
+    color:var(--secondary-red);
+    margin-right: .3rem;
+}
+
+.no-data-msg{
+    margin-top:10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:2.2rem;
+    font-family: var(--heading-font);
+    font-weight: 400;
+    color:#555;
+}
+
+.no-data-msg svg{
+    margin-right: 1rem;
 }
