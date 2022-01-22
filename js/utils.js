@@ -12,10 +12,14 @@ export async function fetchNews(query) {
     return [data.total_hits, data];
 }
 
-export function createNewsSection(data, heading,className) {
-    heading = heading.replace(/\s/g, "");
-    const sectionId = `topic-${heading}`;
-    main.innerHTML += newsSection(heading, sectionId, className);
+export function createNewsSection(data, heading, className) {
+    const sectionId = `topic-${heading.replace(/\s/g, "")}`;
+    if (className == "searched-topic-container") {
+        main.innerHTML = newsSection(heading, sectionId, className);
+    }
+    else {
+        main.innerHTML += newsSection(heading, sectionId, className);
+    }
     createCards(data, sectionId);
 }
 
