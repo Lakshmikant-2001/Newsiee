@@ -1,6 +1,13 @@
-export function newsSection(heading,id) {
-    return `<section class="topic-container" id="${id}">
-                <h3 class="topic-heading">${heading}</h3>
+export function newsSection(heading,id, className) {
+    if(className == "searched-topic-container"){
+        return `<section class="${className}" id="${id}">
+                <h3 class="heading">${heading}</h3>
+                <div class="news-card-wrapper"></div>
+            </section>`
+    }
+    else{
+        return `<section class="${className}" id="${id}">
+                <h3 class="heading">${heading}</h3>
                 <div class="news-card-wrapper"></div>
                 <div class="arrow-div" data-id="${id}">
                     <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -23,6 +30,7 @@ export function newsSection(heading,id) {
                     </svg>
                 </div>
             </section>`
+    }
 };
 
 

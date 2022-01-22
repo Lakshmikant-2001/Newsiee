@@ -77,7 +77,8 @@ function checkTtlTopics() {
 function createNewsSection(data, heading) {
     heading = heading.replace(/\s/g, "");
     const sectionId = `topic-${heading}`;
-    main.innerHTML += newsSection(heading, sectionId);
+    const className = `category-topics-container`;
+    main.innerHTML += newsSection(heading, sectionId, className);
     createCards(data, sectionId);
 }
 
