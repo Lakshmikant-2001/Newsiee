@@ -1,7 +1,7 @@
 import { newsSection, newsCard } from "./template.js";
 
-export async function fetchNews(query) {
-    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10`, {
+export async function fetchNews(query,pageNumber) {
+    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10&page=${pageNumber}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "free-news.p.rapidapi.com",
@@ -9,7 +9,7 @@ export async function fetchNews(query) {
         }
     });
     const data = await response.json();
-    return [data.total_hits, data];
+    return [data.total_hits, data, data.total_pages];
 }
 
 export function createNewsSection(data, heading, className) {
@@ -24,7 +24,7 @@ export function createNewsSection(data, heading, className) {
 }
 
 
-function createCards(data, sectionId) {
+export function createCards(data, sectionId) {
     const currentNewsCardWrapper = document.querySelector(`#${sectionId} > .news-card-wrapper`);
     const articles = data.articles;
     articles.forEach(article => {

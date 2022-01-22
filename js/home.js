@@ -36,7 +36,7 @@ function randomWordGen() {
 }
 
 async function checkAvail(randomWord) {
-    const result = await fetchNews(randomWord);
+    const result = await fetchNews(randomWord,1);
     const isAvail = result[0];
     const data = result[1];
     if (!isAvail) {
