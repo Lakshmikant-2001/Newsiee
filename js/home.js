@@ -24,9 +24,7 @@ function wordPicker() {
             wordPicker()
         }
         else {
-            setTimeout(() => {
-                checkAvail(randomWord);
-            }, 1200)
+            checkAvail(randomWord);
             genWords.push(randomWord);
         }
 }

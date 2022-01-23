@@ -1,15 +1,35 @@
 import { newsSection, newsCard } from "./template.js";
 
-export async function fetchNews(query,pageNumber) {
-    const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10&page=${pageNumber}`, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "free-news.p.rapidapi.com",
-            "x-rapidapi-key": "1544c12ce7mshb9037b498f18f31p12611djsnbb00e4c0c136"
+function sleep(milliseconds) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds))
+}
+
+export async function fetchNews(query, pageNumber) {
+    await sleep(1001);
+    try {
+        const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10&page=${pageNumber}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "free-news.p.rapidapi.com",
+                "x-rapidapi-key": "1544c12ce7mshb9037b498f18f31p12611djsnbb00e4c0c136"
+            }
+        })
+        if (!response.ok) {
+            fetchNews(query, pageNumber);
         }
-    });
-    const data = await response.json();
-    return [data.total_hits, data, data.total_pages];
+        else {
+            try {
+                const data = await response.json();
+                return [data.total_hits, data, data.total_pages];
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 export function createNewsSection(data, heading, className) {
@@ -22,7 +42,6 @@ export function createNewsSection(data, heading, className) {
     }
     createCards(data, sectionId);
 }
-
 
 export function createCards(data, sectionId) {
     const currentNewsCardWrapper = document.querySelector(`#${sectionId} > .news-card-wrapper`);

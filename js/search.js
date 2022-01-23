@@ -73,39 +73,38 @@ async function checkAndCreateSection(query) {
     }
     else {
         createNewsSection(data, query, className);
-        setTimeout(() => { removeLoadingAnimation(main, loaderDiv); }, 1001);
-        addInfScroll();
-    }
-}
-
-const debounce = (func, delay) => {
-    let debounceTimer
-    return function() {
-            clearTimeout(debounceTimer)
-                debounceTimer = setTimeout(() => func.apply(this, arguments), delay)
-    }
-} 
-
-function addInfScroll() {
-    window.addEventListener("scroll", debounce(() => {
-        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
-            pageNumber++;
-            const toScroll = window.scrollY;
-            if (ttlPages >= pageNumber) {
-                addLoadingAnimation(main, loaderDiv)
-                setTimeout(() => {
-                    appendCards(pageNumber, toScroll);
-                }, 1001);
-            }
+        removeLoadingAnimation(main, loaderDiv);
+        if (ttlPages > 1) {
+            const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+            lastCardObserver.observe(lastCard);
         }
-    },1002));
+    }
 }
 
-async function appendCards(pageNumber, scroll) {
-    const result = await fetchNews(query, pageNumber);
-    const sectionId = `topic-${query.replace(/\s/g, "")}`;
-    const data = result[1];
-    createCards(data, sectionId);
-    removeLoadingAnimation(main, loaderDiv);
-    window.scrollBy(0, scroll);
+async function appendCards() {
+    pageNumber++;
+    if (pageNumber <= ttlPages) {
+        const sectionId = `topic-${query.replace(/\s/g, "")}`;
+        const result = await fetchNews(query, pageNumber);
+        const data = result[1];
+        createCards(data, sectionId);
+    }
+    else {
+        const section = document.querySelector(`section`);
+        const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+        lastCardObserver.unobserve(lastCard);
+        section.innerHTML += ` <p class = "no-data-msg";><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No more data</p>`;
+    }
 }
+
+const lastCardObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting)
+            return appendCards()
+        lastCardObserver.unobserve(entry.target);
+        const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+        lastCardObserver.observe(lastCard);
+    })
+}, {
+    rootMargin: "500px",
+});

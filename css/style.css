@@ -8,6 +8,7 @@
 
 body {
     font-family: var(--primary-font);
+    scroll-behavior: smooth;
 }
 
 input, a, li, button {
@@ -504,4 +505,8 @@ a {
 
 .no-data-msg svg{
     margin-right: 1rem;
+}
+
+section > .no-data-msg{
+    margin-top:2rem;
 }
