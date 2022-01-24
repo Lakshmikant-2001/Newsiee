@@ -11,3 +11,16 @@
     --primary-red: #c84c4c;
     --secondary-red: #cc6060;
 }
+
+body::-webkit-scrollbar{
+    background-color: var(--secondary-black);
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: var(--secondary-red);
+}
+
+body::-webkit-scrollbar-thumb:hover{
+    background-color: var(--primary-red);
+}

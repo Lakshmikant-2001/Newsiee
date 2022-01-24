@@ -38,6 +38,7 @@ searchBarInp.addEventListener("keydown", (e) => {
         }, 1000)
     }
     if (e.key == "Enter" && searchBarInp.value != "") {
+        pageNumber=1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
@@ -54,6 +55,7 @@ searchBtn.addEventListener("click", () => {
         }, 1000)
     }
     if (searchBarInp.value != "") {
+        pageNumber=1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
@@ -98,13 +100,12 @@ async function appendCards() {
 }
 
 const lastCardObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+    const entry = entries[0];
         if (entry.isIntersecting)
             return appendCards()
         lastCardObserver.unobserve(entry.target);
         const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
         lastCardObserver.observe(lastCard);
-    })
 }, {
     rootMargin: "500px",
 });
