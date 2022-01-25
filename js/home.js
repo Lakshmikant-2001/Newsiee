@@ -1,16 +1,27 @@
 import { clickSlider } from "./slider.js";
 import { addLoadingAnimation, removeLoadingAnimation } from "./loader.js";
-import { fetchNews,createNewsSection } from "./utils.js";
+import { fetchNews, createNewsSection } from "./utils.js";
 
 const main = document.querySelector("main");
 const loaderDiv = document.querySelector(".loader-div");
 const className = `category-topics-container`;
+const homePageMenu = document.querySelector("#suggested");
 
 let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture", "crypto"];
 let genWords = [], sessionTopics = [], noDataWords = [];
 
 window.onload = () => {
+    loadHomePage();
+}
+
+homePageMenu.addEventListener("click",()=> {
+    loadHomePage();
+})
+
+export function loadHomePage() {
+    main.innerHTML="";
     addLoadingAnimation(main, loaderDiv);
+    sessionTopics=[];
     wordPicker();
 }
 
@@ -34,7 +45,7 @@ function randomWordGen() {
 }
 
 async function checkAvail(randomWord) {
-    const result = await fetchNews(randomWord,1);
+    const result = await fetchNews(randomWord, 1);
     const isAvail = result[0];
     const data = result[1];
     if (!isAvail) {
@@ -42,7 +53,7 @@ async function checkAvail(randomWord) {
         noDataWords.push(randomWord);
     }
     else {
-        createNewsSection(data, randomWord,className);
+        createNewsSection(data, randomWord, className);
         sessionTopics.push(randomWord);
         checkTtlTopics()
     }

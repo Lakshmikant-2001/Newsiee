@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="shortcut icon" href="./assets/newsiee-favicon.png">
     <title>Newsiee - home</title>
 </head>
+
 <body>
     <header id="header">
         <div class="ham-holder">
@@ -29,14 +31,20 @@
     </header>
     <nav id="side-nav" class="open">
         <ul>
-            <li class="nav-links"><span class="iconify" data-icon="bx:bx-world" data-width="26px"></span></li>
-            <li class="nav-links"><span class="iconify" data-icon="dashicons:flag" data-width="26px"></span></li>
-            <li class="nav-links"><span class="iconify" data-icon="carbon:location-filled" data-width="26px"></span>
+            <li class="nav-links" id="world" data-route="/world"><span class="iconify" data-icon="bx:bx-world"
+                    data-width="26px"></span></li>
+            <li class="nav-links" id="country" data-route="/country"><span class="iconify" data-icon="dashicons:flag"
+                    data-width="26px"></span></li>
+            <li class="nav-links" id="local" data-route="/local"><span class="iconify" data-icon="carbon:location-filled"
+                    data-width="26px"></span>
             </li>
-            <li class="nav-links"><span class="iconify" data-icon="gridicons:reader-following" data-width="26px"></span>
+            <li class="nav-links" id="following" data-route="/following"><span class="iconify"
+                    data-icon="gridicons:reader-following" data-width="26px"></span>
             </li>
-            <li class="nav-links"><span class="iconify" data-icon="iconoir:suggestion" data-width="26px"></span></li>
-            <li class="nav-links"><span class="iconify" data-icon="gridicons:themes" data-width="26px"></span></li>
+            <li class="nav-links" id="suggested" data-route="/"><span class="iconify" data-icon="iconoir:suggestion"
+                    data-width="26px"></span></li>
+            <li class="nav-links" id="themes"><span class="iconify" data-icon="gridicons:themes"
+                    data-width="26px"></span></li>
         </ul>
     </nav>
     <main id="main"></main>
@@ -63,6 +71,7 @@
     <script src="./js/common.js"></script>
     <script src="./js/search.js" type="module"></script>
     <script src="./js/home.js" type="module"></script>
+    <script src="./js/router.js" type="module"></script>
     <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
 </body>
 

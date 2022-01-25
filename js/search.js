@@ -38,12 +38,12 @@ searchBarInp.addEventListener("keydown", (e) => {
         }, 1000)
     }
     if (e.key == "Enter" && searchBarInp.value != "") {
-        pageNumber=1;
+        pageNumber = 1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
-        addLoadingAnimation(main, loaderDiv);
-        checkAndCreateSection(query);
+        window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
+        loadSearchPage(query)
     }
 });
 
@@ -55,14 +55,19 @@ searchBtn.addEventListener("click", () => {
         }, 1000)
     }
     if (searchBarInp.value != "") {
-        pageNumber=1;
+        pageNumber = 1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
-        addLoadingAnimation(main, loaderDiv);
-        checkAndCreateSection(query);
+        window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
+        loadSearchPage(query)
     }
 })
+
+export function loadSearchPage(query) {
+    addLoadingAnimation(main, loaderDiv);
+    checkAndCreateSection(query);
+}
 
 async function checkAndCreateSection(query) {
     const result = await fetchNews(query, pageNumber);
@@ -101,11 +106,13 @@ async function appendCards() {
 
 const lastCardObserver = new IntersectionObserver(entries => {
     const entry = entries[0];
-        if (entry.isIntersecting)
-            return appendCards()
-        lastCardObserver.unobserve(entry.target);
-        const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+    if (entry.isIntersecting)
+        return appendCards()
+    lastCardObserver.unobserve(entry.target);
+    const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+    if (lastCard) {
         lastCardObserver.observe(lastCard);
+    }
 }, {
     rootMargin: "500px",
 });

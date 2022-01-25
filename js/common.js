@@ -9,3 +9,4 @@ hamBtn.addEventListener("click",()=> {
         sideNavBar.classList.replace("open","close");
     }
 })
+

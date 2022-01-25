@@ -1,40 +1,39 @@
-export function newsSection(heading,id, className) {
-    if(className == "searched-topic-container"){
+export function newsSection(heading, id, className) {
+    if (className == "category-topics-container") {
         return `<section class="${className}" id="${id}">
-                <h3 class="heading">${heading}</h3>
-                <div class="news-card-wrapper"></div>
-            </section>`
+        <h3 class="heading">${heading}</h3>
+        <div class="news-card-wrapper"></div>
+        <div class="arrow-div" data-id="${id}">
+            <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
+                data-width="60" data-rotate="90deg">
+                <g transform="rotate(90 12 12)">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
+                        fill="currentColor"></path>
+                </g>
+            </svg>
+            <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
+                data-width="60" data-rotate="-90deg">
+                <g transform="rotate(-90 12 12)">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
+                        fill="currentColor"></path>
+                </g>
+            </svg>
+        </div>
+    </section>`
     }
-    else{
+    else {
         return `<section class="${className}" id="${id}">
                 <h3 class="heading">${heading}</h3>
                 <div class="news-card-wrapper"></div>
-                <div class="arrow-div" data-id="${id}">
-                    <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                        role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
-                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
-                        data-width="60" data-rotate="90deg">
-                        <g transform="rotate(90 12 12)">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
-                                fill="currentColor"></path>
-                        </g>
-                    </svg>
-                    <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                        role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
-                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
-                        data-width="60" data-rotate="-90deg">
-                        <g transform="rotate(-90 12 12)">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
-                                fill="currentColor"></path>
-                        </g>
-                    </svg>
-                </div>
             </section>`
     }
 };
 
-
-export function newsCard(source,sourceTitle,img,headlines,summary,link){
+export function newsCard(source, sourceTitle, img, headlines, summary, link) {
     return `<div class="news-card-holder">
     <div class="news-card">
         <div class="news-source" title="${sourceTitle}">${source}</div>
@@ -51,8 +50,8 @@ export function newsCard(source,sourceTitle,img,headlines,summary,link){
 }
 
 
-export function countriesList(){
-   return ` <div id="country-list">
+export function countriesList() {
+    return ` <div id="country-list">
                 <h4 class="heading">Please select your country</h4>
                 <ul>
                     <li id="AF"><span>🇦🇫</span>Afghanistan</li>
