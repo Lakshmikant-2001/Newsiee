@@ -26,3 +26,9 @@ const route = {
     "/": loadHomePage,
     "/search": getQuery,
 }
+
+window.onload= function(){
+    const path = window.location.pathname;
+    console.log(path)
+    route[path].call();
+}

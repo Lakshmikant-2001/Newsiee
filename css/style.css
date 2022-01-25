@@ -322,10 +322,32 @@ a {
     overflow-y: auto;
     margin-bottom: 1.5rem;
     word-spacing: .2rem;
+    padding-right: 1rem;
 }
 
-.news-des::-webkit-scrollbar {
-    visibility: hidden;
+.news-des::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+
+.news-des::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
+
+.news-des::-webkit-scrollbar-thumb:hover{
+    background-color: transparent;
+}
+
+.news-des:hover::-webkit-scrollbar {
+    background-color:var(--secondary-black);
+}
+
+.news-des:hover::-webkit-scrollbar-thumb {
+    background-color:var(--primary-red);
+}
+
+.news-des:hover::-webkit-scrollbar-thumb:hover {
+    background-color:var(--secondary-red);
 }
 
 .visit-btn {

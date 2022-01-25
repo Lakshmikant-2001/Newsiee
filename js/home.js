@@ -10,10 +10,6 @@ const homePageMenu = document.querySelector("#suggested");
 let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture", "crypto"];
 let genWords = [], sessionTopics = [], noDataWords = [];
 
-window.onload = () => {
-    loadHomePage();
-}
-
 homePageMenu.addEventListener("click",()=> {
     loadHomePage();
 })
