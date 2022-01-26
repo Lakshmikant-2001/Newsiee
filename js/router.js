@@ -1,6 +1,6 @@
 import { loadHomePage } from "./home.js";
 import { loadWorldPage } from "./world.js";
-import { loadCountryPage } from "./country.js";
+import { isCountryAvail } from "./country.js";
 import { loadLocalPage } from "./local.js";
 
 import { addMenuSelStyles, removeMenuSelStyles , clearInput,  searchPageCall, handleLocation } from "./modules/_utils.js";
@@ -36,6 +36,6 @@ const route = {
     "/": loadHomePage,
     "/search": searchPageCall,
     "/world": loadWorldPage,
-    "/country": loadCountryPage,
+    "/country": isCountryAvail,
     "/local": loadLocalPage
 }

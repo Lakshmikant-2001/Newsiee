@@ -160,6 +160,7 @@ a {
     line-height: 2rem;
     border-bottom: 1px dashed #11111125;
     padding: 1.5rem 0;
+    position: relative;
 }
 
 .searched-topic-container .news-card-wrapper, .world-news-container .news-card-wrapper, 
@@ -586,4 +587,18 @@ section>.no-data-msg {
 
 #country-list ul::-webkit-scrollbar {
     width: 8px;
+}
+
+.change-btn{
+    position: absolute;
+    right:0;
+    top:0;
+    margin:1.5rem;
+    cursor: pointer;
+    color:var(--secondary-red);
+    display:none;
+}
+
+.change-btn:hover{
+    transform: scale(1.1);
 }
