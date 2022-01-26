@@ -9,14 +9,16 @@ const homePageMenu = document.querySelector("#suggested");
 let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture", "crypto"];
 let genWords = [], sessionTopics = [], noDataWords = [];
 
-homePageMenu.addEventListener("click",()=> {
-    loadHomePage();
+homePageMenu.addEventListener("click", () => {
+    if (window.location.pathname != homePageMenu.dataset.route) {
+        loadHomePage();
+    }
 })
 
 export function loadHomePage() {
-    main.innerHTML="";
+    main.innerHTML = "";
     addLoadingAnimation();
-    sessionTopics=[];
+    sessionTopics = [];
     wordPicker();
 }
 

@@ -4,7 +4,9 @@ import { checkAndCreateSection } from "./modules/_utils.js";
 const localMenu  = document.querySelector("#local");
 
 localMenu.addEventListener("click", ()=> {
-    loadLocalPage()
+    if(window.location.pathname != localMenu.dataset.route){
+        loadLocalPage()
+    }
 })
 
 export function loadLocalPage() {

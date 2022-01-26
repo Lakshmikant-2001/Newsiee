@@ -8,7 +8,7 @@ function sleep(milliseconds) {
 }
 
 export async function fetchNews(query, pageNumber) {
-    await sleep(1001);
+    await sleep(1005);
     try {
         const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10&page=${pageNumber}`, {
             "method": "GET",

@@ -10,10 +10,12 @@ const navLinks = document.querySelectorAll("#side-nav li");
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
         const path = link.dataset.route;
-        window.history.pushState({ path }, "", path);
-        clearInput()
-        removeMenuSelStyles()
-        addMenuSelStyles(link)
+        if(path !=  window.location.pathname){
+            window.history.pushState({ path }, "", path);
+            clearInput()
+            removeMenuSelStyles()
+            addMenuSelStyles(link)
+        }
     })
 })
 

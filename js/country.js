@@ -4,7 +4,9 @@ import { checkAndCreateSection } from "./modules/_utils.js";
 const countryMenu  = document.querySelector("#country");
 
 countryMenu.addEventListener("click", ()=> {
-    loadCountryPage()
+    if(window.location.pathname != countryMenu.dataset.route){
+        loadCountryPage()
+    }
 })
 
 export function loadCountryPage() {

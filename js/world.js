@@ -4,7 +4,9 @@ import { checkAndCreateSection } from "./modules/_utils.js";
 const worldMenu  = document.querySelector("#world");
 
 worldMenu.addEventListener("click", ()=> {
-    loadWorldPage()
+    if(window.location.pathname != worldMenu.dataset.route){
+        loadWorldPage()
+    }
 })
 
 export function loadWorldPage() {

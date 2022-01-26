@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { checkAndCreateSection , removeMenuSelStyles } from "./modules/_utils.js";
+import { checkAndCreateSection, getQuery, removeMenuSelStyles } from "./modules/_utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
 const searchBarMsg = document.querySelector("#search-div >  .message");
@@ -38,8 +38,10 @@ searchBarInp.addEventListener("keydown", (e) => {
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
-        window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
-        loadSearchPage(query)
+        if(query != getQuery()){
+            window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
+            loadSearchPage(query)
+        }
     }
 });
 
@@ -54,8 +56,10 @@ searchBtn.addEventListener("click", () => {
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
-        window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
-        loadSearchPage(query)
+        if(query != getQuery()){
+            window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
+            loadSearchPage(query)
+        }
     }
 })
 
@@ -63,5 +67,5 @@ export function loadSearchPage(query) {
     const className = `searched-topic-container`;
     removeMenuSelStyles()
     addLoadingAnimation();
-    checkAndCreateSection(query,className);
+    checkAndCreateSection(query, className);
 }
