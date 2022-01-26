@@ -16,7 +16,7 @@ homePageMenu.addEventListener("click",()=> {
 
 export function loadHomePage() {
     main.innerHTML="";
-    addLoadingAnimation(main, loaderDiv);
+    addLoadingAnimation();
     sessionTopics=[];
     wordPicker();
 }
@@ -62,7 +62,7 @@ function checkTtlTopics() {
         }
         else {
             imgErroFix();
-            removeLoadingAnimation(main, loaderDiv);
+            removeLoadingAnimation();
             clickSlider();
         }
     }

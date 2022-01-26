@@ -1,14 +1,13 @@
-import { addLoadingAnimation, removeLoadingAnimation } from "./loader.js";
-import { fetchNews, createNewsSection, createCards } from "./utils.js";
+import { addLoadingAnimation } from "./loader.js";
+import { checkAndCreateSection } from "./utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
 const main = document.querySelector("main");
 const loaderDiv = document.querySelector(".loader-div");
 const searchBarMsg = document.querySelector("#search-div >  .message");
 const inpClearBtn = document.querySelector("#inp-clear-btn");
-const className = `searched-topic-container`;
 const searchBtn = document.querySelector("#search-icon");
-let pageNumber = 1, query, ttlPages;
+let query;
 
 searchBarInp.addEventListener("focus", () => {
     inpClearBtn.style.display = "unset";
@@ -38,7 +37,6 @@ searchBarInp.addEventListener("keydown", (e) => {
         }, 1000)
     }
     if (e.key == "Enter" && searchBarInp.value != "") {
-        pageNumber = 1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
@@ -55,7 +53,6 @@ searchBtn.addEventListener("click", () => {
         }, 1000)
     }
     if (searchBarInp.value != "") {
-        pageNumber = 1;
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
@@ -65,54 +62,7 @@ searchBtn.addEventListener("click", () => {
 })
 
 export function loadSearchPage(query) {
-    addLoadingAnimation(main, loaderDiv);
-    checkAndCreateSection(query);
+    const className = `searched-topic-container`;
+    addLoadingAnimation();
+    checkAndCreateSection(query,className);
 }
-
-async function checkAndCreateSection(query) {
-    const result = await fetchNews(query, pageNumber);
-    const isAvail = result[0];
-    const data = result[1];
-    ttlPages = result[2];
-    if (!isAvail) {
-        removeLoadingAnimation(main, loaderDiv);
-        main.innerHTML = ` <p class = "no-data-msg"><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No data Available!</p>`;
-    }
-    else {
-        createNewsSection(data, query, className);
-        removeLoadingAnimation(main, loaderDiv);
-        if (ttlPages > 1) {
-            const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
-            lastCardObserver.observe(lastCard);
-        }
-    }
-}
-
-async function appendCards() {
-    pageNumber++;
-    if (pageNumber <= ttlPages) {
-        const sectionId = `topic-${query.replace(/\s/g, "")}`;
-        const result = await fetchNews(query, pageNumber);
-        const data = result[1];
-        createCards(data, sectionId);
-    }
-    else {
-        const section = document.querySelector(`section`);
-        const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
-        lastCardObserver.unobserve(lastCard);
-        section.innerHTML += ` <p class = "no-data-msg";><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No more data</p>`;
-    }
-}
-
-const lastCardObserver = new IntersectionObserver(entries => {
-    const entry = entries[0];
-    if (entry.isIntersecting)
-        return appendCards()
-    lastCardObserver.unobserve(entry.target);
-    const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
-    if (lastCard) {
-        lastCardObserver.observe(lastCard);
-    }
-}, {
-    rootMargin: "500px",
-});
