@@ -1,9 +1,8 @@
-import { clickSlider } from "./slider.js";
-import { addLoadingAnimation, removeLoadingAnimation } from "./loader.js";
-import { fetchNews, createNewsSection } from "./utils.js";
+import { clickSlider } from "./modules/_slider.js";
+import { addLoadingAnimation, removeLoadingAnimation } from "./modules/_loader.js";
+import { fetchNews, createNewsSection } from "./modules/_utils.js";
 
 const main = document.querySelector("main");
-const loaderDiv = document.querySelector(".loader-div");
 const className = `category-topics-container`;
 const homePageMenu = document.querySelector("#suggested");
 

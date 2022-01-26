@@ -1,9 +1,7 @@
-import { addLoadingAnimation } from "./loader.js";
-import { checkAndCreateSection } from "./utils.js";
+import { addLoadingAnimation } from "./modules/_loader.js";
+import { checkAndCreateSection , removeMenuSelStyles } from "./modules/_utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
-const main = document.querySelector("main");
-const loaderDiv = document.querySelector(".loader-div");
 const searchBarMsg = document.querySelector("#search-div >  .message");
 const inpClearBtn = document.querySelector("#inp-clear-btn");
 const searchBtn = document.querySelector("#search-icon");
@@ -63,6 +61,7 @@ searchBtn.addEventListener("click", () => {
 
 export function loadSearchPage(query) {
     const className = `searched-topic-container`;
+    removeMenuSelStyles()
     addLoadingAnimation();
     checkAndCreateSection(query,className);
 }

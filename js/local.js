@@ -1,11 +1,9 @@
-import { addLoadingAnimation } from "./loader.js";
-import { checkAndCreateSection } from "./utils.js";
+import { addLoadingAnimation } from "./modules/_loader.js";
+import { checkAndCreateSection } from "./modules/_utils.js";
 
 const localMenu  = document.querySelector("#local");
 
 localMenu.addEventListener("click", ()=> {
-    const searchBarInp = document.querySelector("#search-inp-fld");
-    searchBarInp.value="";
     loadLocalPage()
 })
 

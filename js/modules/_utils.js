@@ -1,5 +1,7 @@
-import { newsSection, newsCard } from "./template.js";
-import { removeLoadingAnimation } from "./loader.js";
+import { newsSection, newsCard } from "./_template.js";
+import { removeLoadingAnimation } from "./_loader.js";
+
+import { loadSearchPage } from "../search.js";
 
 function sleep(milliseconds) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds))
@@ -65,12 +67,11 @@ export function createCards(data, currentNewsCardWrapper) {
 
 
 //y-axis section
-
-let pageNumber = 1, ttlPages,query;
+let pageNumber = 1, ttlPages, query;
 
 export async function checkAndCreateSection(Query, className) {
     pageNumber = 1;
-    query= Query;
+    query = Query;
     const result = await fetchNews(query, pageNumber);
     const isAvail = result[0];
     const data = result[1];
@@ -118,5 +119,49 @@ async function appendCards() {
         const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
         lastCardObserver.unobserve(lastCard);
         currentNewsCardWrapper.innerHTML += ` <p class = "no-data-msg";><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No more data</p>`;
+    }
+}
+
+export function getQuery() {
+    const urlParams = new URLSearchParams(location.search);
+    const query = urlParams.get("q");
+    return query;
+}
+
+export function clearInput() {
+    const searchBarInp = document.querySelector("#search-inp-fld");
+    searchBarInp.value = "";
+}
+
+export function removeMenuSelStyles() {
+    const navLinks = document.querySelectorAll("#side-nav li");
+    navLinks.forEach(link => {
+        link.classList.remove("selected-menu");
+    })
+}
+
+export function addMenuSelStyles(link) {
+    link.classList.add("selected-menu");
+}
+
+export function searchPageCall() {
+    const query = getQuery();
+    loadSearchPage(query)
+}
+
+export function handleLocation(path) {
+    const searchBarInp = document.querySelector("#search-inp-fld");
+    clearInput()
+    removeMenuSelStyles()
+    if (path == undefined || path == "/") {
+        addMenuSelStyles(document.querySelector(`#suggested`))
+    }
+    else if (path == "/search") {
+        const query = getQuery()
+        searchBarInp.value = query;
+    }
+    else {
+        const menuTag = document.querySelector(`#${path.replace(/\//g, '')}`);
+        addMenuSelStyles(menuTag)
     }
 }
