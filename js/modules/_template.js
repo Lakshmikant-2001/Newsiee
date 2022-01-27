@@ -28,8 +28,8 @@ export function newsSection(heading, id, className) {
     else {
         return `<section class="${className}" id="${id}">
                 <h3 class="heading">${heading}</h3>
-                <div class="change-btn">
-                    <span class="iconify" data-icon="ic:baseline-change-circle" data-width="45"></span>
+                <div class="change-btn left pseudo-title" data-title="change">
+                    <span class="iconify" data-icon="ic:baseline-change-circle" data-width="40"></span>
                 </div>
                 <div class="news-card-wrapper"></div>
             </section>`

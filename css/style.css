@@ -152,8 +152,8 @@ a {
 }
 
 /* news card styles */
-.category-topics-container, .searched-topic-container, .world-news-container, 
-    .country-news-container, .local-news-container {
+.category-topics-container, .searched-topic-container, .world-news-container,
+.country-news-container, .local-news-container {
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
@@ -163,8 +163,8 @@ a {
     position: relative;
 }
 
-.searched-topic-container .news-card-wrapper, .world-news-container .news-card-wrapper, 
-    .country-news-container .news-card-wrapper, .local-news-container .news-card-wrapper {
+.searched-topic-container .news-card-wrapper, .world-news-container .news-card-wrapper,
+.country-news-container .news-card-wrapper, .local-news-container .news-card-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -387,7 +387,7 @@ a {
     background-color: #eee;
     font-weight: 600;
     font-size: 1.2rem;
-    overflow: hidden;
+    z-index: 1;
     padding-top: 1rem;
     box-shadow: 1px 1px 1px #11111130;
     transition: transform .3s linear;
@@ -412,6 +412,7 @@ a {
 #side-nav .nav-links {
     padding: 1rem 1.2rem;
     cursor: pointer;
+    position: relative;
 }
 
 .nav-links svg g {
@@ -589,16 +590,68 @@ section>.no-data-msg {
     width: 8px;
 }
 
-.change-btn{
+.change-btn {
     position: absolute;
-    right:0;
-    top:0;
-    margin:1.5rem;
+    right: 0;
+    top: 0;
+    margin: 1.5rem;
     cursor: pointer;
-    color:var(--secondary-red);
-    display:none;
+    color: var(--secondary-red);
+    display: none;
 }
 
-.change-btn:hover{
+.change-btn:hover {
     transform: scale(1.1);
+}
+
+.pseudo-title:hover:after {
+    content: attr(data-title);
+    display: flex;
+    align-items: center;
+    max-height: 27px;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    color: #555;
+    background-color: #f0f0f0;
+    padding: .3rem .5rem;
+    margin-left: 0.85rem;
+    white-space: nowrap;
+    border: 1px solid #55555590;
+    border-left: 4px solid var(--secondary-red);
+    border-radius: .5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    z-index: 20;
+}
+
+.pseudo-title:hover::before {
+    content: url('https://api.iconify.design/bx/bxs-left-arrow.svg?color=%23cc6060&width=10');
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    margin-left: .2rem;
+    color: var(--secondary-red);
+    font-size: .85rem;
+}
+
+.left:hover::after, .left:hover::before {
+    left: unset;
+    right: 100%;
+    transform: translateY(-60%);
+}
+
+.left:hover:after {
+    margin: unset;
+    margin-right: .85rem;
+    border-left: 1px solid #55555590;
+    border-right: 4px solid var(--secondary-red);
+}
+
+.left:hover:before {
+    content: url('https://api.iconify.design/bx/bxs-right-arrow.svg?color=%23cc6060&width=10');
+    margin: unset;
+    margin-right: 0.2rem;
 }

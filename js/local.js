@@ -1,6 +1,6 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
 import { stateList, countriesList } from "./modules/_template.js";
-import { checkAndCreateSection, fetchState } from "./modules/_utils.js";
+import { checkAndCreateSection, fetchState, imgErroFix } from "./modules/_utils.js";
 
 const localMenu = document.querySelector("#local");
 const main = document.querySelector("main");
@@ -16,6 +16,7 @@ async function loadLocalPage(query) {
     addLoadingAnimation();
     await checkAndCreateSection(query, className);
     dispChangeState()
+    imgErroFix()
 }
 
 export function checkCountryAvail() {
@@ -85,7 +86,7 @@ function selectState(stateName) {
 function dispChangeState() {
     const changeBtn = document.querySelector(".change-btn");
     changeBtn.style.display = "unset";
-    changeBtn.title = "change-state"    
+    changeBtn.dataset.title = "change-state"    
     changeBtn.addEventListener("click", () => {
         changeState()
     })

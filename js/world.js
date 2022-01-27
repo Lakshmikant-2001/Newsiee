@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { checkAndCreateSection } from "./modules/_utils.js";
+import { checkAndCreateSection, imgErroFix } from "./modules/_utils.js";
 
 const worldMenu  = document.querySelector("#world");
 
@@ -14,5 +14,6 @@ export function loadWorldPage() {
     const query = "world";
     addLoadingAnimation();
     checkAndCreateSection(query,className);
+    imgErroFix()
 }
 

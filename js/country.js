@@ -1,6 +1,6 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
 import { countriesList } from "./modules/_template.js";
-import { checkAndCreateSection } from "./modules/_utils.js";
+import { checkAndCreateSection, imgErroFix } from "./modules/_utils.js";
 
 const countryMenu = document.querySelector("#country");
 const main = document.querySelector("main");
@@ -16,6 +16,7 @@ async function loadCountryPage(query) {
     addLoadingAnimation();
     await checkAndCreateSection(query, className);
     dispChangeCountry()
+    imgErroFix()
 }
 
 export function isCountryAvail() {
@@ -58,7 +59,7 @@ function selectCountry(countryId, countryName) {
 function dispChangeCountry() {
     const changeBtn = document.querySelector(".change-btn");
     changeBtn.style.display = "unset";
-    changeBtn.title="change-country"
+    changeBtn.dataset.title="change-country"
     changeBtn.addEventListener("click", () => {
         changeCountry()
     })

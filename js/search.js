@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { checkAndCreateSection, getQuery, removeMenuSelStyles } from "./modules/_utils.js";
+import { checkAndCreateSection, getQuery, imgErroFix, removeMenuSelStyles } from "./modules/_utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
 const searchBarMsg = document.querySelector("#search-div >  .message");
@@ -68,4 +68,5 @@ export function loadSearchPage(query) {
     removeMenuSelStyles()
     addLoadingAnimation();
     checkAndCreateSection(query, className);
+    imgErroFix()
 }

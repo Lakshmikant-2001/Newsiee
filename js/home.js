@@ -1,6 +1,6 @@
 import { clickSlider } from "./modules/_slider.js";
 import { addLoadingAnimation, removeLoadingAnimation } from "./modules/_loader.js";
-import { fetchNews, createNewsSection } from "./modules/_utils.js";
+import { fetchNews, createNewsSection, imgErroFix } from "./modules/_utils.js";
 
 const main = document.querySelector("main");
 const className = `category-topics-container`;
@@ -67,13 +67,4 @@ function checkTtlTopics() {
             clickSlider();
         }
     }
-}
-
-function imgErroFix() {
-    const newsImages = document.querySelectorAll(".news-img");
-    newsImages.forEach(img => {
-        img.addEventListener("error", () => {
-            img.setAttribute("src", `./assets/news-cover-img.jpg`);
-        })
-    })
 }

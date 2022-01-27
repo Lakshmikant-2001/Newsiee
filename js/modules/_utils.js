@@ -53,9 +53,9 @@ export function createCards(data, currentNewsCardWrapper) {
         const newsSource = article.clean_url.replace(/\.com/g, "").substr(0, 3);
         const newsSourceTitle = article.clean_url;
         let newsImg = article.media;
-        const pattern = new RegExp(/.png/);
-        const isPng = pattern.test(newsImg);
-        if (newsImg == null || isPng) {
+        const pattern = new RegExp(/.jpg/);
+        const isJpg = pattern.test(newsImg);
+        if (!isJpg) {
             newsImg = "./assets/news-cover-img.jpg"
         }
         const newsHeadlines = article.title;
@@ -183,4 +183,13 @@ export async function fetchState(countryId) {
         console.log(err);
     }
 
+}
+
+export function imgErroFix() {
+    const newsImages = document.querySelectorAll(".news-img");
+    newsImages.forEach(img => {
+        img.addEventListener("error", () => {
+            img.setAttribute("src", `./assets/news-cover-img.jpg`);
+        })
+    })
 }
