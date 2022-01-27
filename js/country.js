@@ -35,7 +35,15 @@ function dispCountryList() {
     const list = countriesListDiv.querySelectorAll("ul>li");
     list.forEach(list => {
         list.addEventListener("click", () => {
-            selectCountry(list.id, list.lastChild.textContent)
+            if(localStorage.getItem("countryId") == list.id){
+                loadCountryPage(localStorage.getItem("countryId"))
+            }
+            else{
+                localStorage.removeItem("countryName")
+                localStorage.removeItem("countryId")
+                localStorage.removeItem("stateName")
+                selectCountry(list.id, list.lastChild.textContent)
+            }
         })
     })
 }
@@ -52,13 +60,10 @@ function dispChangeCountry() {
     changeBtn.style.display = "unset";
     changeBtn.title="change-country"
     changeBtn.addEventListener("click", () => {
-        console.log("call")
         changeCountry()
     })
 }
 
 function changeCountry() {
-    localStorage.removeItem("countryName")
-    localStorage.removeItem("countryId")
     dispCountryList()
 }

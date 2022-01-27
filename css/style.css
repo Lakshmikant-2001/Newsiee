@@ -538,7 +538,7 @@ section>.no-data-msg {
     margin-top: 2rem;
 }
 
-#country-list {
+.list {
     position: fixed;
     top: 53%;
     left: 50%;
@@ -552,10 +552,9 @@ section>.no-data-msg {
     box-shadow: 4px 5px 9px #11111130, -4px -5px 9px #11111130;
     border-radius: 1rem;
     overflow: hidden;
-    display: none;
 }
 
-#country-list .heading {
+.list .heading {
     text-align: center;
     border-bottom: 1px dashed #11111130;
     padding: 1rem;
@@ -564,28 +563,29 @@ section>.no-data-msg {
     background-color: #55555510;
 }
 
-#country-list ul {
+.list ul {
     display: flex;
     flex-direction: column;
     list-style: none;
-    height: 70vh;
-    overflow-y: scroll;
+    height: max-content;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
-#country-list li {
+.list li {
     padding: 1rem 2rem;
     cursor: pointer;
 }
 
-#country-list span {
+.list span {
     margin-right: 1rem;
 }
 
-#country-list li:hover {
+.list li:hover {
     background-color: rgb(250, 235, 235);
 }
 
-#country-list ul::-webkit-scrollbar {
+.list ul::-webkit-scrollbar {
     width: 8px;
 }
 

@@ -54,7 +54,7 @@ export function newsCard(source, sourceTitle, img, headlines, summary, link) {
 
 
 export function countriesList() {
-    return ` <div id="country-list">
+    return ` <div class="list" id="country-list">
                 <h4 class="heading">Please select your country</h4>
                 <ul>
                     <li id="AF"><span>🇦🇫</span>Afghanistan</li>
@@ -309,4 +309,10 @@ export function countriesList() {
                     <li id="SX"><span>🇸🇽</span>Sint Maarten (Dutch part)</li>
                 </ul>
             </div>`
+}
+
+export function stateList(){
+    return `<div class="list" id="state-list">
+                <h4 class="heading">Please select your state</h4>
+                <ul></ul>`
 }

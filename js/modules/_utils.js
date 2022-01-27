@@ -165,3 +165,22 @@ export function handleLocation(path) {
         addMenuSelStyles(menuTag)
     }
 }
+
+export async function fetchState(countryId) {
+    var headers = new Headers();
+    headers.append("X-CSCAPI-KEY", "Z2JORDBsNFRIU28wWU9YZ1JqWEJqMDIxSFBqU0NyQTVyV2R5SGM4ZQ==");
+    var requestOptions = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow'
+    };
+    try{
+        const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryId}/states/`, requestOptions)
+        const data = await response.json()
+        return data;
+    }
+    catch(err){
+        console.log(err);
+    }
+
+}

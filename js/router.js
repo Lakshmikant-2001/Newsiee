@@ -1,9 +1,9 @@
 import { loadHomePage } from "./home.js";
 import { loadWorldPage } from "./world.js";
 import { isCountryAvail } from "./country.js";
-import { loadLocalPage } from "./local.js";
+import { checkCountryAvail } from "./local.js";
 
-import { addMenuSelStyles, removeMenuSelStyles , clearInput,  searchPageCall, handleLocation } from "./modules/_utils.js";
+import { addMenuSelStyles, removeMenuSelStyles , clearInput,  searchPageCall, handleLocation, checkAndCreateSection } from "./modules/_utils.js";
 
 const navLinks = document.querySelectorAll("#side-nav li");
 
@@ -37,5 +37,5 @@ const route = {
     "/search": searchPageCall,
     "/world": loadWorldPage,
     "/country": isCountryAvail,
-    "/local": loadLocalPage
+    "/local": checkCountryAvail
 }
