@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { stateList, countriesList } from "./modules/_template.js";
+import { stateCountryList , countriesList} from "./modules/_template.js";
 import { checkAndCreateSection, fetchState, imgErroFix } from "./modules/_utils.js";
 
 const localMenu = document.querySelector("#local");
@@ -40,11 +40,12 @@ function isLocalAvail() {
 }
 
 function dispCountryList() {
-    main.innerHTML = countriesList();
-    const countriesListDiv = document.querySelector("#country-list")
-    countriesListDiv.style.display = "unset";
-    const list = countriesListDiv.querySelectorAll("ul>li");
-    list.forEach(list => {
+    main.innerHTML = stateCountryList('country')
+    const list = document.querySelector(".list > ul");
+    countriesList.forEach(country => {
+        list.innerHTML += `<li id="${country.countryId}"><span>${country.countryEmoji}</span>${country.countryName}</li>`
+    })
+    document.querySelectorAll("#country-list  li").forEach(list => {
         list.addEventListener("click", () => {
             selectCountry(list.id, list.lastChild.textContent)
         })
@@ -60,7 +61,7 @@ function selectCountry(countryId, countryName) {
 
 async function dispStatesList() {
     const states = await fetchState(localStorage.getItem("countryId"))
-    main.innerHTML = stateList();
+    main.innerHTML = stateCountryList('state');
     const list = document.querySelector(".list > ul");
     states.forEach(state => {
         list.innerHTML += `<li>${state.name}</li>`

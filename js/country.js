@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { countriesList } from "./modules/_template.js";
+import { stateCountryList , countriesList} from "./modules/_template.js";
 import { checkAndCreateSection, imgErroFix } from "./modules/_utils.js";
 
 const countryMenu = document.querySelector("#country");
@@ -30,11 +30,12 @@ export function isCountryAvail() {
 }
 
 function dispCountryList() {
-    main.innerHTML = countriesList();
-    const countriesListDiv = document.querySelector("#country-list")
-    countriesListDiv.style.display = "unset";
-    const list = countriesListDiv.querySelectorAll("ul>li");
-    list.forEach(list => {
+    main.innerHTML = stateCountryList('country')
+    const list = document.querySelector(".list > ul");
+    countriesList.forEach(country => {
+        list.innerHTML += `<li id="${country.countryId}"><span>${country.countryEmoji}</span>${country.countryName}</li>`
+    })
+    document.querySelectorAll("#country-list  li").forEach(list => {
         list.addEventListener("click", () => {
             if(localStorage.getItem("countryId") == list.id){
                 loadCountryPage(localStorage.getItem("countryId"))
