@@ -3,18 +3,34 @@ import { loadWorldPage } from "./world.js";
 import { isCountryAvail } from "./country.js";
 import { checkCountryAvail } from "./local.js";
 
-import { addMenuSelStyles, removeMenuSelStyles , clearInput,  searchPageCall, handleLocation, checkAndCreateSection } from "./modules/_utils.js";
+import { addMenuSelStyles, removeMenuSelStyles, clearInput, searchPageCall, handleLocation, checkAndCreateSection } from "./modules/_utils.js";
 
 const navLinks = document.querySelectorAll("#side-nav li");
 
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
         const path = link.dataset.route;
-        if(path !=  window.location.pathname){
+        if (path != window.location.pathname) {
             window.history.pushState({ path }, "", path);
             clearInput()
             removeMenuSelStyles()
             addMenuSelStyles(link)
+        }
+        link.blur()
+    })
+})
+
+navLinks.forEach(link => {
+    link.addEventListener("keypress", (e) => {
+        if(e.key == "Enter"){
+            const path = link.dataset.route;
+            if (path != window.location.pathname) {
+                window.history.pushState({ path }, "", path);
+                clearInput()
+                removeMenuSelStyles()
+                addMenuSelStyles(link)
+            }
+            link.blur()
         }
     })
 })

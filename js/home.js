@@ -15,6 +15,14 @@ homePageMenu.addEventListener("click", () => {
     }
 })
 
+homePageMenu.addEventListener("keydown", (e) => {
+    if(e.key=="Enter"){
+        if (window.location.pathname != homePageMenu.dataset.route) {
+            loadHomePage();
+        }
+    }
+})
+
 export function loadHomePage() {
     main.innerHTML = "";
     addLoadingAnimation();

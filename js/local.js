@@ -11,6 +11,14 @@ localMenu.addEventListener("click", () => {
     }
 })
 
+localMenu.addEventListener("keypress", (e) => {
+    if(e.key == "Enter"){
+        if (window.location.pathname != localMenu.dataset.route) {
+            checkCountryAvail()
+        }
+    }
+})
+
 async function loadLocalPage(query) {
     const className = `local-news-container`;
     addLoadingAnimation();
@@ -109,6 +117,11 @@ function dispChangeState() {
     changeBtn.dataset.title = "change-state"    
     changeBtn.addEventListener("click", () => {
         changeState()
+    })
+    changeBtn.addEventListener("keypress", (e) => {
+        if(e.key == "Enter"){
+            changeState()
+        }
     })
 }
 

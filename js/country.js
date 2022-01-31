@@ -11,6 +11,14 @@ countryMenu.addEventListener("click", () => {
     }
 })
 
+countryMenu.addEventListener("keypress", (e) => {
+    if(e.key == "Enter"){
+        if (window.location.pathname != countryMenu.dataset.route) {
+            isCountryAvail()
+        }
+    }
+})
+
 async function loadCountryPage(query) {
     const className = `country-news-container`;
     addLoadingAnimation();
@@ -18,8 +26,6 @@ async function loadCountryPage(query) {
     dispChangeCountry()
     imgErroFix()
 }
-
-
 
 export function isCountryAvail() {
     const userCountry = localStorage.getItem("countryName");
@@ -82,6 +88,11 @@ function dispChangeCountry() {
     changeBtn.dataset.title = "change-country"
     changeBtn.addEventListener("click", () => {
         changeCountry()
+    })
+    changeBtn.addEventListener("keypress", (e) => {
+        if(e.key == "Enter"){
+            changeCountry()
+        }
     })
 }
 
