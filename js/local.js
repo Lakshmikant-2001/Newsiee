@@ -1,6 +1,6 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
 import { stateCountryList , countriesList} from "./modules/_template.js";
-import { checkAndCreateSection, fetchState, imgErroFix } from "./modules/_utils.js";
+import { checkAndCreateSection, fetchState, imgErroFix, searchList } from "./modules/_utils.js";
 
 const localMenu = document.querySelector("#local");
 const main = document.querySelector("main");
@@ -43,7 +43,7 @@ function dispCountryList() {
     main.innerHTML = stateCountryList('country')
     const list = document.querySelector(".list > ul");
     countriesList.forEach(country => {
-        list.innerHTML += `<li id="${country.countryId}"><span>${country.countryEmoji}</span>${country.countryName}</li>`
+        list.innerHTML += `<li tabindex="1" id="${country.countryId}"><span>${country.countryEmoji}</span>${country.countryName}</li>`
     })
     document.querySelectorAll("#country-list  li").forEach(list => {
         list.addEventListener("click", () => {
@@ -60,22 +60,41 @@ function selectCountry(countryId, countryName) {
 }
 
 async function dispStatesList() {
-    const states = await fetchState(localStorage.getItem("countryId"))
+    let states = await fetchState(localStorage.getItem("countryId"))
     main.innerHTML = stateCountryList('state');
     const list = document.querySelector(".list > ul");
-    states.forEach(state => {
-        list.innerHTML += `<li>${state.name}</li>`
-    });
-    document.querySelectorAll("#state-list  li").forEach(element => {
-        element.addEventListener("click", () => {
-            if(element.textContent == localStorage.getItem("stateName")){
-                loadLocalPage(localStorage.getItem("stateName"))
-            }
-            else{
-                selectState(element.textContent)
-            }
-        })
-    });
+    if(states .length == 0){
+        list.innerHTML += `<li>No States Available</li>`;
+    }
+    else{
+        states = states.sort(sortArray)
+        states.forEach(state => {
+            list.innerHTML += `<li tabindex="1">${state.name}</li>`
+        });
+        document.querySelectorAll("#state-list  li").forEach(li => {
+            li.addEventListener("click", () => {
+                if(li.textContent == localStorage.getItem("stateName")){
+                    loadLocalPage(localStorage.getItem("stateName"))
+                }
+                else{
+                    selectState(li.textContent)
+                }
+            })
+        });
+        document.querySelectorAll("#state-list  li").forEach(li => {
+            li.addEventListener("keypress", (e) => {
+                if (e.key == "Enter") {
+                    if(li.textContent == localStorage.getItem("stateName")){
+                        loadLocalPage(localStorage.getItem("stateName"))
+                    }
+                    else{
+                        selectState(li.textContent)
+                    }
+                }
+            })
+        });
+        searchList()
+    }
 }
 
 function selectState(stateName) {
@@ -96,4 +115,8 @@ function dispChangeState() {
 function changeState() {
     localStorage.removeItem("stateName")
     dispStatesList()
+}
+
+function sortArray(x, y){
+    return x.name.localeCompare(y.name);
 }

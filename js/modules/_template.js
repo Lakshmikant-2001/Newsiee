@@ -1352,8 +1352,17 @@ export const countriesList = [
     }
 ]
 
-export function stateCountryList(listName){
+export function stateCountryList(listName) {
     return `<div class="list" id="${listName}-list">
                 <h4 class="heading">Please select your ${listName}</h4>
                 <ul></ul>`
+}
+
+export function noDataTemplate() {
+    return `<section>
+                <div class="change-btn left pseudo-title" data-title="change">
+                    <span class="iconify" data-icon="ic:baseline-change-circle" data-width="40"></span>
+                </div>    
+                <p class = "no-data-msg"><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No data Available!</p>     
+            </section>`
 }

@@ -153,7 +153,7 @@ a {
 
 /* news card styles */
 .category-topics-container, .searched-topic-container, .world-news-container,
-.country-news-container, .local-news-container {
+.country-news-container, .local-news-container,section {
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
@@ -582,8 +582,9 @@ section>.no-data-msg {
     margin-right: 1rem;
 }
 
-.list li:hover {
+.list li:hover,.list li:focus {
     background-color: rgb(250, 235, 235);
+    outline: none;
 }
 
 .list ul::-webkit-scrollbar {

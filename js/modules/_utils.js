@@ -1,6 +1,6 @@
 import { newsSection, newsCard } from "./_template.js";
 import { removeLoadingAnimation } from "./_loader.js";
-
+import { noDataTemplate } from "./_template.js";
 import { loadSearchPage } from "../search.js";
 
 function sleep(milliseconds) {
@@ -78,7 +78,7 @@ export async function checkAndCreateSection(Query, className) {
     ttlPages = result[2];
     if (!isAvail) {
         removeLoadingAnimation();
-        main.innerHTML = ` <p class = "no-data-msg"><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No data Available!</p>`;
+        main.innerHTML = noDataTemplate();
     }
     else {
         createNewsSection(data, query, className);
@@ -191,5 +191,20 @@ export function imgErroFix() {
         img.addEventListener("error", () => {
             img.setAttribute("src", `./assets/news-cover-img.jpg`);
         })
+    })
+}
+
+export function searchList() {
+    const listDiv = document.querySelector(".list ul");
+    const list = document.querySelectorAll(".list  li")
+    document.querySelector("body").addEventListener("keypress", (e) => {
+        for (const li of list) {
+            if (li.lastChild.textContent[0].toLowerCase() == e.key.toLowerCase()) {
+                listDiv.scrollTop = 0;
+                listDiv.scrollBy(0, li.offsetTop - 78);
+                li.focus()
+                break;
+            }
+        }
     })
 }
