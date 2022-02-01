@@ -208,3 +208,15 @@ export function searchList() {
         }
     })
 }
+const creditsContainer = document.querySelector("#credits-container");
+const main = document.querySelector("main");
+
+export function showCredits(){
+    main.style.filter = "blur(5px)";
+    creditsContainer.classList.remove("none");
+}
+
+export function removeCredits(){
+    main.style.filter = "none";
+    creditsContainer.classList.add("none");
+}

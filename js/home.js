@@ -66,7 +66,7 @@ async function checkAvail(randomWord) {
 
 function checkTtlTopics() {
     if (topics.length != genWords.length) {
-        if (sessionTopics.length != 3) {
+        if (sessionTopics.length != 1) {
             wordPicker();
         }
         else {
