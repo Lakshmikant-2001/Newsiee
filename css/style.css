@@ -25,6 +25,9 @@ a {
     text-decoration: none;
 }
 
+a:focus{
+    outline:2px solid #999;
+}
 /* header-styles */
 #header {
     background-color: var(--primary-black);
@@ -148,7 +151,7 @@ a {
     --secondary-black: #1e1d1e;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-height: calc(100vh - 240px);
 }
 
 /* news card styles */
@@ -609,7 +612,7 @@ section>.no-data-msg {
     overflow: hidden;
 }
 
-.list .heading, #credits .heading {
+.list .heading, #credits-container .heading {
     text-align: center;
     border-bottom: 1px dashed #11111130;
     padding: 1rem;
@@ -660,15 +663,14 @@ section>.no-data-msg {
     outline: none;
 }
 
-#credits {
-    position: absolute;
+#credits-container {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     perspective: 1000px;
     font-size: 1.6rem;
     color: #555;
-    display: none;
 }
 
 .credits-holder {
@@ -698,10 +700,6 @@ section>.no-data-msg {
     transform: rotateX(180deg);
 }
 
-.credits-holder:hover {
-    transform: rotateX(180deg);
-}
-
 .credits-holder .heading {
     width: 100%;
 }
@@ -723,6 +721,32 @@ section>.no-data-msg {
     margin: 0 1rem;
 }
 
-.credits-holder .iconify:hover{
-    color:var(--primary-red) !important;
+.credits-holder a:hover > .iconify,.credits-holder a:hover > .iconify{
+    color: var(--primary-red) !important;
+}
+
+.credits-holder h5 {
+    position: relative;
+}
+
+.credits-holder h5>.iconify {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    margin-left: 1.2rem;
+    cursor: pointer;
+}
+
+.credits-holder h5>.iconify:hover, .credits-holder h5>.iconify:focus {
+    color: #111 !important;
+    outline:2px solid #999;
+}
+
+.none {
+    display: none;
+}
+
+.show-back {
+    transform: rotateX(180deg);
 }

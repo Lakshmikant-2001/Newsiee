@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { checkAndCreateSection, getQuery, imgErroFix, removeMenuSelStyles } from "./modules/_utils.js";
+import { checkAndCreateSection, getQuery, imgErroFix, removeCredits, removeMenuSelStyles } from "./modules/_utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
 const searchBarMsg = document.querySelector("#search-div >  .message");
@@ -25,6 +25,7 @@ inpClearBtn.addEventListener("focusout", () => {
 
 inpClearBtn.addEventListener("click", () => {
     searchBarInp.value = "";
+    removeCredits();
 })
 
 searchBarInp.addEventListener("keydown", (e) => {
@@ -39,6 +40,7 @@ searchBarInp.addEventListener("keydown", (e) => {
         searchBarInp.blur();
         query = searchBarInp.value;
         if(query != getQuery()){
+            removeCredits()
             window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
             loadSearchPage(query)
         }
@@ -53,6 +55,7 @@ searchBtn.addEventListener("click", () => {
         }, 1000)
     }
     if (searchBarInp.value != "") {
+        removeCredits()
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
