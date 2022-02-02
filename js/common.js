@@ -28,3 +28,25 @@ body.addEventListener("keydown", (e) => {
         contractSearchBar()
     }
 })
+
+document.querySelector("main").addEventListener("click", () => {
+    if (headerTitle.classList.length != 0 ) {
+        contractSearchBar()
+    }
+    if (body.offsetWidth <= 650) {
+        sideNavBar.classList = [];
+        sideNavBar.classList.add("close");
+    }
+})
+
+
+body.onresize = function () {
+    if (body.offsetWidth <= 650) {
+        sideNavBar.classList = [];
+        sideNavBar.classList.add("close");
+    }
+    else {
+        sideNavBar.classList = [];
+        sideNavBar.classList.add("open");
+    }
+}

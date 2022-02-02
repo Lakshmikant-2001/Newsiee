@@ -5,6 +5,8 @@ const searchBarInp = document.querySelector("#search-inp-fld");
 const searchBarMsg = document.querySelector("#search-div >  .message");
 const inpClearBtn = document.querySelector("#inp-clear-btn");
 const searchBtn = document.querySelector("#search-icon");
+const sideNavBar = document.querySelector("#side-nav");
+const body = document.querySelector("body");
 let query;
 
 searchBarInp.addEventListener("focus", () => {
@@ -38,6 +40,10 @@ searchBarInp.addEventListener("keydown", (e) => {
     if (e.key == "Enter" && searchBarInp.value != "") {
         contractSearchBar()
         removeCredits()
+        if (body.offsetWidth <= 650) {
+            sideNavBar.classList = [];
+            sideNavBar.classList.add("close");
+        }
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
@@ -58,6 +64,10 @@ searchBtn.addEventListener("click", () => {
     if (searchBarInp.value != "") {
         removeCredits()
         contractSearchBar()
+        if (body.offsetWidth <= 650) {
+            sideNavBar.classList = [];
+            sideNavBar.classList.add("close");
+        }
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;

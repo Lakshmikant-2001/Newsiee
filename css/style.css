@@ -16,7 +16,7 @@ input, a, li, button {
     background-color: inherit;
     font: inherit;
 }
-
+    
 li {
     list-style: none;
 }
@@ -154,6 +154,7 @@ a:focus {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 240px);
+    user-select: none;
 }
 
 /* news card styles */
@@ -619,13 +620,13 @@ section>.no-data-msg {
     text-align: center;
     border-bottom: 1px dashed #11111130;
     padding: 1rem;
-    font-size: clamp(1.2rem,3vw, 1.5rem);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 600;
     background-color: #55555510;
 }
 
 .list .heading::first-letter, #credits-container .heading::first-letter {
-    font-size: clamp(1.6rem,3vw, 1.9rem);
+    font-size: clamp(1.6rem, 3vw, 1.9rem);
 }
 
 .list ul {
@@ -665,8 +666,8 @@ section>.no-data-msg {
     display: none;
 }
 
-.change-btn svg{
-    font-size:40px;
+.change-btn svg {
+    font-size: clamp(30px, 4vw, 40px);
 }
 
 .change-btn:hover, .change-btn:focus {
@@ -686,7 +687,7 @@ section>.no-data-msg {
 }
 
 .credits-holder {
-    width:min(90vw,500px);
+    width: min(90vw, 500px);
     height: min(60vw, 330px);
     min-height: 230px;
     transform-style: preserve-3d;
@@ -724,7 +725,7 @@ section>.no-data-msg {
 }
 
 .back-side li, .front-side li {
-    margin:clamp(1rem, 4vw, 1.5rem) 0;
+    margin: clamp(1rem, 4vw, 1.5rem) 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -734,8 +735,8 @@ section>.no-data-msg {
     margin: 0 1rem;
 }
 
-.credits-holder a > svg{
-    font-size:clamp(40px, 4vw, 50px);
+.credits-holder a>svg {
+    font-size: clamp(40px, 4vw, 50px);
 }
 
 .credits-holder a:hover>.iconify, .credits-holder a:hover>.iconify {
@@ -844,7 +845,7 @@ section>.no-data-msg {
         display: none;
     }
 
-    #inp-clear-btn{
+    #inp-clear-btn {
         display: none;
     }
 
@@ -877,6 +878,10 @@ section>.no-data-msg {
         font-size: .75rem;
     }
 
+    .news-source::before {
+        width: 35px;
+    }
+
     .visit-btn {
         padding: .15rem 1.1rem .08rem;
     }
@@ -887,6 +892,14 @@ section>.no-data-msg {
 
     .arrow-div svg {
         width: 40px;
+    }
+
+    .list ul::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .news-des:hover::-webkit-scrollbar {
+        width: 3px;
     }
 }
 
@@ -920,8 +933,13 @@ section>.no-data-msg {
         top: 15px;
         left: -7px;
     }
+
     .list li {
         padding: .8rem 1.8rem;
+    }
+
+    .news-source::before {
+        width: 30px;
     }
 }
 
