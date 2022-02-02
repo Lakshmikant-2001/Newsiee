@@ -5,18 +5,18 @@ export function newsSection(heading, id, className) {
         <div class="news-card-wrapper"></div>
         <div class="arrow-div" data-id="${id}">
             <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
+                role="img" class="iconify iconify--ic right-arrow" 
                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
-                data-width="60" data-rotate="90deg">
+                 data-rotate="90deg">
                 <g transform="rotate(90 12 12)">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
                         fill="currentColor"></path>
                 </g>
             </svg>
             <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                role="img" class="iconify iconify--ic right-arrow" width="60" height="60"
+                role="img" class="iconify iconify--ic right-arrow"  
                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ic:sharp-arrow-drop-down-circle"
-                data-width="60" data-rotate="-90deg">
+                data-rotate="-90deg">
                 <g transform="rotate(-90 12 12)">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"
                         fill="currentColor"></path>
@@ -29,7 +29,7 @@ export function newsSection(heading, id, className) {
         return `<section class="${className}" id="${id}">
                 <h3 class="heading">${heading}</h3>
                 <div class="change-btn left pseudo-title" data-title="change" tabindex="1">
-                    <span class="iconify" data-icon="ic:baseline-change-circle" data-width="40"></span>
+                    <span class="iconify" data-icon="ic:baseline-change-circle"></span>
                 </div>
                 <div class="news-card-wrapper"></div>
             </section>`
@@ -1361,8 +1361,8 @@ export function stateCountryList(listName) {
 export function noDataTemplate() {
     return `<section>
                 <div class="change-btn left pseudo-title" data-title="change" tabindex="1">
-                    <span class="iconify" data-icon="ic:baseline-change-circle" data-width="40"></span>
+                    <span class="iconify" data-icon="ic:baseline-change-circle"></span>
                 </div>    
-                <p class = "no-data-msg"><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No data Available!</p>     
+                <p class = "no-data-msg"><span class="iconify" data-icon="noto-v1:sad-but-relieved-face"></span>No data Available!</p>     
             </section>`
 }
