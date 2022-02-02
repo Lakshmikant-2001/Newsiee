@@ -174,12 +174,12 @@ export async function fetchState(countryId) {
         headers: headers,
         redirect: 'follow'
     };
-    try{
+    try {
         const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryId}/states/`, requestOptions)
         const data = await response.json()
         return data;
     }
-    catch(err){
+    catch (err) {
         console.log(err);
     }
 
@@ -211,12 +211,40 @@ export function searchList() {
 const creditsContainer = document.querySelector("#credits-container");
 const main = document.querySelector("main");
 
-export function showCredits(){
+export function showCredits() {
     main.style.filter = "blur(5px)";
     creditsContainer.classList.remove("none");
 }
 
-export function removeCredits(){
+export function removeCredits() {
     main.style.filter = "none";
     creditsContainer.classList.add("none");
+}
+
+const body = document.querySelector("body");
+const hamHolder = document.querySelector(".ham-holder");
+const headerTitle = document.querySelector("#header-title");
+const searchInpFld = document.querySelector("#search-inp-fld");
+const inpClrBtn = document.querySelector("#inp-clear-btn");
+const searchDiv = document.querySelector("#search-div");
+
+export function expandSearchBar() {
+    if (body.offsetWidth <= 650) {
+        hamHolder.classList.add("none");
+        headerTitle.classList.add("none");
+        searchDiv.style.width = "100%";
+        searchInpFld.style.display = "unset";
+    }
+    else return;
+}
+
+export function contractSearchBar() {
+    if (body.offsetWidth <= 650) {
+        hamHolder.classList.remove("none");
+        headerTitle.classList.remove("none");
+        searchInpFld.style.display = "none";
+        inpClrBtn.style.display="none";
+        searchDiv.style.width = "max-content";
+    }
+    else return;
 }

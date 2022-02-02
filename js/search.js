@@ -1,5 +1,5 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
-import { checkAndCreateSection, getQuery, imgErroFix, removeCredits, removeMenuSelStyles } from "./modules/_utils.js";
+import { checkAndCreateSection, getQuery, imgErroFix, removeCredits, removeMenuSelStyles , contractSearchBar} from "./modules/_utils.js";
 
 const searchBarInp = document.querySelector("#search-inp-fld");
 const searchBarMsg = document.querySelector("#search-div >  .message");
@@ -36,11 +36,12 @@ searchBarInp.addEventListener("keydown", (e) => {
         }, 1000)
     }
     if (e.key == "Enter" && searchBarInp.value != "") {
+        contractSearchBar()
+        removeCredits()
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
         if(query != getQuery()){
-            removeCredits()
             window.history.pushState({ "path": "/search" }, "", `/search?q=${query}`);
             loadSearchPage(query)
         }
@@ -56,6 +57,7 @@ searchBtn.addEventListener("click", () => {
     }
     if (searchBarInp.value != "") {
         removeCredits()
+        contractSearchBar()
         searchBarMsg.style.display = "none";
         searchBarInp.blur();
         query = searchBarInp.value;
