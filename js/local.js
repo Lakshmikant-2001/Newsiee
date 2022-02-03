@@ -1,28 +1,12 @@
-import { addLoadingAnimation } from "./modules/_loader.js";
-import { stateCountryList , countriesList} from "./modules/_template.js";
+import { addLoadingAnimation, removeLoadingAnimation } from "./modules/_loader.js";
+import { stateCountryList, countriesList } from "./modules/_template.js";
 import { checkAndCreateSection, fetchState, imgErroFix, searchList } from "./modules/_utils.js";
 
-const localMenu = document.querySelector("#local");
 const main = document.querySelector("main");
-
-localMenu.addEventListener("click", () => {
-    if (window.location.pathname != localMenu.dataset.route) {
-        checkCountryAvail()
-    }
-})
-
-localMenu.addEventListener("keypress", (e) => {
-    if(e.key == "Enter"){
-        if (window.location.pathname != localMenu.dataset.route) {
-            checkCountryAvail()
-        }
-    }
-})
 
 async function loadLocalPage(query) {
     const className = `local-news-container`;
-    addLoadingAnimation();
-    await checkAndCreateSection(query, className);
+    await checkAndCreateSection(query, className, "/local");
     dispChangeState()
     imgErroFix()
 }
@@ -34,6 +18,7 @@ export function checkCountryAvail() {
     }
     else {
         dispCountryList()
+        removeLoadingAnimation()
     }
 }
 
@@ -44,6 +29,7 @@ function isLocalAvail() {
     }
     else {
         dispStatesList()
+        removeLoadingAnimation()
     }
 }
 
@@ -71,20 +57,20 @@ async function dispStatesList() {
     let states = await fetchState(localStorage.getItem("countryId"))
     main.innerHTML = stateCountryList('state');
     const list = document.querySelector(".list > ul");
-    if(states .length == 0){
+    if (states.length == 0) {
         list.innerHTML += `<li>No States Available</li>`;
     }
-    else{
+    else {
         states = states.sort(sortArray)
         states.forEach(state => {
             list.innerHTML += `<li tabindex="1">${state.name}</li>`
         });
         document.querySelectorAll("#state-list  li").forEach(li => {
             li.addEventListener("click", () => {
-                if(li.textContent == localStorage.getItem("stateName")){
+                if (li.textContent == localStorage.getItem("stateName")) {
                     loadLocalPage(localStorage.getItem("stateName"))
                 }
-                else{
+                else {
                     selectState(li.textContent)
                 }
             })
@@ -92,10 +78,10 @@ async function dispStatesList() {
         document.querySelectorAll("#state-list  li").forEach(li => {
             li.addEventListener("keypress", (e) => {
                 if (e.key == "Enter") {
-                    if(li.textContent == localStorage.getItem("stateName")){
+                    if (li.textContent == localStorage.getItem("stateName")) {
                         loadLocalPage(localStorage.getItem("stateName"))
                     }
-                    else{
+                    else {
                         selectState(li.textContent)
                     }
                 }
@@ -106,6 +92,7 @@ async function dispStatesList() {
 }
 
 function selectState(stateName) {
+    addLoadingAnimation()
     localStorage.setItem("stateName", stateName);
     main.innerHTML = "";
     loadLocalPage(localStorage.getItem("stateName"))
@@ -113,16 +100,18 @@ function selectState(stateName) {
 
 function dispChangeState() {
     const changeBtn = document.querySelector(".change-btn");
-    changeBtn.style.display = "unset";
-    changeBtn.dataset.title = "change-state"    
-    changeBtn.addEventListener("click", () => {
-        changeState()
-    })
-    changeBtn.addEventListener("keypress", (e) => {
-        if(e.key == "Enter"){
+    if (changeBtn == null) {
+        changeBtn.style.display = "unset";
+        changeBtn.dataset.title = "change-state"
+        changeBtn.addEventListener("click", () => {
             changeState()
-        }
-    })
+        })
+        changeBtn.addEventListener("keypress", (e) => {
+            if (e.key == "Enter") {
+                changeState()
+            }
+        })
+    }
 }
 
 function changeState() {
@@ -130,6 +119,6 @@ function changeState() {
     dispStatesList()
 }
 
-function sortArray(x, y){
+function sortArray(x, y) {
     return x.name.localeCompare(y.name);
 }

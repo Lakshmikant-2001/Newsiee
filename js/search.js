@@ -82,6 +82,6 @@ export function loadSearchPage(query) {
     const className = `searched-topic-container`;
     removeMenuSelStyles()
     addLoadingAnimation();
-    checkAndCreateSection(query, className);
+    checkAndCreateSection(query, className, "/search");
     imgErroFix()
 }

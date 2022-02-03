@@ -1,42 +1,17 @@
-import { loadHomePage } from "./home.js";
-import { loadWorldPage } from "./world.js";
-import { isCountryAvail } from "./country.js";
-import { checkCountryAvail } from "./local.js";
-
-import { addMenuSelStyles, removeMenuSelStyles, clearInput, searchPageCall, handleLocation, removeCredits, contractSearchBar } from "./modules/_utils.js";
+import { addLoadingAnimation } from "./modules/_loader.js";
+import { route } from "./modules/_route.js";
+import { addMenuSelStyles, removeMenuSelStyles, clearInput, handleLocation, removeCredits, contractSearchBar, closeNavOnMobile } from "./modules/_utils.js";
 
 const navLinks = document.querySelectorAll("#side-nav li");
-const sideNavBar = document.querySelector("#side-nav");
-const body = document.querySelector("body");
 
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
-        removeCredits()
-        contractSearchBar()
-        if (body.offsetWidth <= 650) {
-            sideNavBar.classList = [];
-            sideNavBar.classList.add("close");
-        }
-        const path = link.dataset.route;
-        if (path != window.location.pathname) {
-            window.history.pushState({ path }, "", path);
-            clearInput()
-            removeMenuSelStyles()
-            addMenuSelStyles(link)
-        }
-        link.blur()
-    })
-})
-
-navLinks.forEach(link => {
-    link.addEventListener("keypress", (e) => {
-        if (e.key == "Enter") {
+        if(link.id!="credits"){
+            link.blur()
+            addLoadingAnimation();
             removeCredits()
             contractSearchBar()
-            if (body.offsetWidth <= 650) {
-                sideNavBar.classList = [];
-                sideNavBar.classList.add("close");
-            }
+            closeNavOnMobile()
             const path = link.dataset.route;
             if (path != window.location.pathname) {
                 window.history.pushState({ path }, "", path);
@@ -44,37 +19,43 @@ navLinks.forEach(link => {
                 removeMenuSelStyles()
                 addMenuSelStyles(link)
             }
+            route[path].call()
+        }
+    })
+})
+
+navLinks.forEach(link => {
+    link.addEventListener("keypress", (e) => {
+        if (e.key == "Enter" && link.id!="credits") {
             link.blur()
+            addLoadingAnimation();
+            removeCredits()
+            contractSearchBar()
+            closeNavOnMobile()
+            const path = link.dataset.route;
+            route[path].call()
+            if (path != window.location.pathname) {
+                window.history.pushState({ path }, "", path);
+                clearInput()
+                removeMenuSelStyles()
+                addMenuSelStyles(link)
+            }
         }
     })
 })
 
 window.onpopstate = function (e) {
+    addLoadingAnimation()
     const path = e.state?.path;
     path ? route[path].call() : route["/"].call();
-    handleLocation(path)
-    sideNavBar.classList = [];
-    sideNavBar.classList.add("close");
-    if (body.offsetWidth <= 650) {
-        sideNavBar.classList = [];
-        sideNavBar.classList.add("close");
-    }
+    handleLocation(path);
+    closeNavOnMobile()
 }
 
 window.onload = function () {
+    addLoadingAnimation()
     const path = window.location.pathname;
     route[path].call();
     handleLocation(path)
-    if (body.offsetWidth <= 650) {
-        sideNavBar.classList = [];
-        sideNavBar.classList.add("close");
-    }
-}
-
-const route = {
-    "/": loadHomePage,
-    "/search": searchPageCall,
-    "/world": loadWorldPage,
-    "/country": isCountryAvail,
-    "/local": checkCountryAvail
+    closeNavOnMobile()
 }

@@ -7,7 +7,7 @@ function sleep(milliseconds) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds))
 }
 
-export async function fetchNews(query, pageNumber) {
+export async function fetchNews(query, pageNumber, route) {
     await sleep(1005);
     try {
         const response = await fetch(`https://free-news.p.rapidapi.com/v1/search?q="${query}"&lang=en&page_size=10&page=${pageNumber}`, {
@@ -17,12 +17,16 @@ export async function fetchNews(query, pageNumber) {
                 "x-rapidapi-key": "1544c12ce7mshb9037b498f18f31p12611djsnbb00e4c0c136"
             }
         })
-        if (!response.ok) {
-            fetchNews(query, pageNumber);
+        if (!response.ok && window.location.pathname == route) {
+            return await fetchNews(query, pageNumber, route);
+        }
+        else if (window.location.pathname != route) {
+            return;
         }
         else {
             try {
                 const data = await response.json();
+                removeLoadingAnimation()
                 return [data.total_hits, data, data.total_pages];
             }
             catch (error) {
@@ -67,30 +71,33 @@ export function createCards(data, currentNewsCardWrapper) {
 
 
 //y-axis section
-let pageNumber = 1, ttlPages, query;
+let pageNumber = 1, ttlPages, query, Route;
 
-export async function checkAndCreateSection(Query, className) {
+export async function checkAndCreateSection(Query, className, route) {
+    Route = route;
     pageNumber = 1;
     query = Query;
-    const result = await fetchNews(query, pageNumber);
-    const isAvail = result[0];
-    const data = result[1];
-    ttlPages = result[2];
-    if (!isAvail) {
-        removeLoadingAnimation();
-        main.innerHTML = noDataTemplate();
-    }
-    else {
-        createNewsSection(data, query, className);
-        removeLoadingAnimation();
-        if (ttlPages > 1) {
-            addIntersectionObserver(className)
+    const result = await fetchNews(query, pageNumber, Route);
+    if (result != undefined) {
+        const isAvail = result[0];
+        const data = result[1];
+        ttlPages = result[2];
+        if (!isAvail) {
+            removeLoadingAnimation();
+            main.innerHTML = noDataTemplate();
+        }
+        else {
+            createNewsSection(data, query, className);
+            removeLoadingAnimation();
+            if (ttlPages > 1) {
+                addIntersectionObserver()
+            }
         }
     }
 }
 
-function addIntersectionObserver(className) {
-    const lastCard = document.querySelector(`.${className} .news-card-wrapper > :last-child`);
+function addIntersectionObserver() {
+    const lastCard = document.querySelector(`.news-card-wrapper > :last-child`);
     lastCardObserver.observe(lastCard);
 }
 
@@ -108,15 +115,17 @@ const lastCardObserver = new IntersectionObserver(entries => {
 });
 
 async function appendCards() {
-    const currentNewsCardWrapper = document.querySelector(`section > .news-card-wrapper`);
+    const currentNewsCardWrapper = document.querySelector(`section > .news-card-wrapper`)
     pageNumber++;
     if (pageNumber <= ttlPages) {
-        const result = await fetchNews(query, pageNumber);
-        const data = result[1];
-        createCards(data, currentNewsCardWrapper);
+        const result = await fetchNews(query, pageNumber, Route);
+        if (result != undefined) {
+            const data = result[1];
+            createCards(data, currentNewsCardWrapper);
+        }
     }
     else {
-        const lastCard = document.querySelector(".searched-topic-container .news-card-wrapper > :last-child");
+        const lastCard = document.querySelector(".news-card-wrapper > :last-child");
         lastCardObserver.unobserve(lastCard);
         currentNewsCardWrapper.innerHTML += ` <p class = "no-data-msg";><span class="iconify" data-icon="noto-v1:sad-but-relieved-face" data-width="50px"></span>No more data</p>`;
     }
@@ -182,7 +191,6 @@ export async function fetchState(countryId) {
     catch (err) {
         console.log(err);
     }
-
 }
 
 export function imgErroFix() {
@@ -222,6 +230,7 @@ export function removeCredits() {
 }
 
 const body = document.querySelector("body");
+const sideNavBar = document.querySelector("#side-nav");
 const hamHolder = document.querySelector(".ham-holder");
 const headerTitle = document.querySelector("#header-title");
 const searchInpFld = document.querySelector("#search-inp-fld");
@@ -243,8 +252,15 @@ export function contractSearchBar() {
         hamHolder.classList.remove("none");
         headerTitle.classList.remove("none");
         searchInpFld.style.display = "none";
-        inpClrBtn.style.display="none";
+        inpClrBtn.style.display = "none";
         searchDiv.style.width = "max-content";
     }
     else return;
+}
+
+export function closeNavOnMobile() {
+    if (body.offsetWidth <= 650) {
+        sideNavBar.classList = [];
+        sideNavBar.classList.add("close");
+    }
 }

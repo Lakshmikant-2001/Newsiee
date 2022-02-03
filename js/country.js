@@ -2,27 +2,11 @@ import { addLoadingAnimation } from "./modules/_loader.js";
 import { stateCountryList, countriesList } from "./modules/_template.js";
 import { checkAndCreateSection, imgErroFix, searchList } from "./modules/_utils.js";
 
-const countryMenu = document.querySelector("#country");
 const main = document.querySelector("main");
-
-countryMenu.addEventListener("click", () => {
-    if (window.location.pathname != countryMenu.dataset.route) {
-        isCountryAvail()
-    }
-})
-
-countryMenu.addEventListener("keypress", (e) => {
-    if(e.key == "Enter"){
-        if (window.location.pathname != countryMenu.dataset.route) {
-            isCountryAvail()
-        }
-    }
-})
 
 async function loadCountryPage(query) {
     const className = `country-news-container`;
-    addLoadingAnimation();
-    await checkAndCreateSection(query, className);
+    await checkAndCreateSection(query, className, "/country");
     dispChangeCountry()
     imgErroFix()
 }
@@ -76,6 +60,7 @@ function dispCountryList() {
 }
 
 function selectCountry(countryId, countryName) {
+    addLoadingAnimation()
     localStorage.setItem("countryName", countryName);
     localStorage.setItem("countryId", countryId);
     main.innerHTML = "";
@@ -84,22 +69,24 @@ function selectCountry(countryId, countryName) {
 
 function dispChangeCountry() {
     const changeBtn = document.querySelector(".change-btn");
-    changeBtn.style.display = "unset";
-    changeBtn.dataset.title = "change-country"
-    changeBtn.addEventListener("click", () => {
-        changeCountry()
-    })
-    changeBtn.addEventListener("keypress", (e) => {
-        if(e.key == "Enter"){
+    if (changeBtn != null) {
+        changeBtn.style.display = "unset";
+        changeBtn.dataset.title = "change-country"
+        changeBtn.addEventListener("click", () => {
             changeCountry()
-        }
-    })
+        })
+        changeBtn.addEventListener("keypress", (e) => {
+            if (e.key == "Enter") {
+                changeCountry()
+            }
+        })
+    }
 }
 
 function changeCountry() {
     dispCountryList()
 }
 
-function sortArray(x, y){
+function sortArray(x, y) {
     return x.countryName.localeCompare(y.countryName);
 }
