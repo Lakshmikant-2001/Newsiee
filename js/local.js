@@ -100,7 +100,7 @@ function selectState(stateName) {
 
 function dispChangeState() {
     const changeBtn = document.querySelector(".change-btn");
-    if (changeBtn == null) {
+    if (changeBtn != null) {
         changeBtn.style.display = "unset";
         changeBtn.dataset.title = "change-state"
         changeBtn.addEventListener("click", () => {

@@ -1,5 +1,5 @@
-export function clickSlider() {
-    const arrows = document.querySelectorAll(".arrow-div svg");
+export function clickSlider(className) {
+    const arrows = document.querySelectorAll(`.${className} .arrow-div svg`);
     const newsCardHolder = document.querySelector(".news-card-holder");
     const marginWidth = window.getComputedStyle(newsCardHolder).marginRight.replace(/\D/g, '');
     const cardWidth = newsCardHolder.offsetWidth;

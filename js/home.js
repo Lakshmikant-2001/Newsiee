@@ -46,6 +46,7 @@ async function checkAvail(randomWord) {
             createNewsSection(data, randomWord, className);
             sessionTopics.push(randomWord);
             checkTtlTopics()
+            clickSlider(className);
         }
     }
 }
@@ -57,8 +58,6 @@ function checkTtlTopics() {
         }
         else {
             imgErroFix();
-            // removeLoadingAnimation();
-            clickSlider();
         }
     }
 }
