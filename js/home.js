@@ -1,11 +1,11 @@
 import { clickSlider } from "./modules/_slider.js";
-// import { addLoadingAnimation, removeLoadingAnimation } from "./modules/_loader.js";
 import { fetchNews, createNewsSection, imgErroFix } from "./modules/_utils.js";
 
 const main = document.querySelector("main");
 const className = `category-topics-container`;
 
-let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "agriculture", "crypto"];
+let topics = ["covid", "ozone", "tesla", "google", "meta", "microsoft", "amazon", "agriculture", "crypto", "youtube", "cricket", "football", "baseball", 
+"redmi", "realme", "legion", "5G", "books", "tree", "coffee", "tea", "space"];
 let genWords = [], sessionTopics = [], noDataWords = [];
 
 export function loadHomePage() {

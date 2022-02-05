@@ -39,6 +39,12 @@ export async function fetchNews(query, pageNumber, route) {
     }
 }
 
+const newsCoverImages = ["news-cover-1.jpg", "news-cover-2.jpeg", "news-cover-3.jpeg", "news-cover-4.jpeg", "news-cover-5.jpeg"];
+
+function randomImgGen() {
+    return newsCoverImages[Math.floor(Math.random(newsCoverImages) * newsCoverImages.length)];
+}
+
 export function createNewsSection(data, heading, className) {
     const sectionId = `topic-${heading.replace(/\s/g, "")}`;
     if (className == "category-topics-container") {
@@ -60,7 +66,7 @@ export function createCards(data, currentNewsCardWrapper) {
         const pattern = new RegExp(/.jpg/);
         const isJpg = pattern.test(newsImg);
         if (!isJpg) {
-            newsImg = "./assets/news-cover-img.jpg"
+            newsImg = `./assets/${randomImgGen()}`;
         }
         const newsHeadlines = article.title;
         const newsLink = article.link;
@@ -197,7 +203,7 @@ export function imgErroFix() {
     const newsImages = document.querySelectorAll(".news-img");
     newsImages.forEach(img => {
         img.addEventListener("error", () => {
-            img.setAttribute("src", `./assets/news-cover-img.jpg`);
+            img.setAttribute("src", `./assets/${randomImgGen()}`);
         })
     })
 }

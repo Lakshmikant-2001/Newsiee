@@ -1,4 +1,4 @@
-import { addLoadingAnimation } from "./modules/_loader.js";
+import { addLoadingAnimation, removeLoadingAnimation } from "./modules/_loader.js";
 import { stateCountryList, countriesList } from "./modules/_template.js";
 import { checkAndCreateSection, imgErroFix, searchList } from "./modules/_utils.js";
 
@@ -18,6 +18,7 @@ export function isCountryAvail() {
     }
     else {
         dispCountryList()
+        removeLoadingAnimation()
     }
 }
 

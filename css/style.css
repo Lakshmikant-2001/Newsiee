@@ -26,7 +26,7 @@ a {
 }
 
 a:focus {
-    outline: 2px solid #999;
+    outline: none;
 }
 
 /* header-styles */
@@ -733,6 +733,7 @@ section>.no-data-msg {
 
 .back-side a, .front-side a {
     margin: 0 1rem;
+    position: relative;
 }
 
 .credits-holder a>svg {
@@ -758,7 +759,6 @@ section>.no-data-msg {
 
 .credits-holder h5>.iconify:hover, .credits-holder h5>.iconify:focus {
     color: #111 !important;
-    outline: 2px solid #999;
 }
 
 .none {
