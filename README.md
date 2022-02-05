@@ -1,8 +1,7 @@
 # NEWSIEE
 
-### A news feeding web app using [Free News API](https://rapidapi.com/newscatcher-api-newscatcher-api-default/api/free-news/) by [Newscatcher](https://newscatcherapi.com/)
+#### A news feeding web app using [Free News API](https://rapidapi.com/newscatcher-api-newscatcher-api-default/api/free-news/) by [Newscatcher](https://newscatcherapi.com/)
 <br>
-
 
 <br>
 
@@ -22,7 +21,7 @@
       - news headlines / title
   - Back side
       - news summary
-      - link to news article
+      - link to the news article
       
       
 <br>
@@ -30,6 +29,12 @@
 Key Implementations
   - SPA with vanilla JS
   - Infinite scrolling using Intersection Observer
+
+<br>
+Thanks to 
+
+   - [Countrystatecity db](https://github.com/dr5hn/countries-states-cities-database)
+   - [Iconify](https://iconify.design/)
 
 <br>
 <br>
