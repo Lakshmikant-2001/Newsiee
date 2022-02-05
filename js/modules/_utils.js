@@ -18,6 +18,7 @@ export async function fetchNews(query, pageNumber, route) {
             }
         })
         if (!response.ok && window.location.pathname == route) {
+            await sleep(500);
             return await fetchNews(query, pageNumber, route);
         }
         else if (window.location.pathname != route) {

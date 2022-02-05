@@ -61,6 +61,7 @@ a:focus {
 #header-title::first-letter {
     background-image: url(https://wwpknightlynews.files.wordpress.com/2014/08/depositphotos_13732950-stock-photo-background-of-old-vintage-newspapers.jpg);
     -webkit-background-clip: text;
+    background-clip: text;
     font-size: clamp(2rem, 3.2vw, 2.6rem);
     color: #ffffff80;
 }
@@ -188,6 +189,7 @@ a:focus {
     font-size: clamp(2rem, 3.2vw, 2.6rem);
     background-image: url(https://wwpknightlynews.files.wordpress.com/2014/08/depositphotos_13732950-stock-photo-background-of-old-vintage-newspapers.jpg);
     -webkit-background-clip: text;
+    background-clip: text;
     color: #55555599;
 }
 

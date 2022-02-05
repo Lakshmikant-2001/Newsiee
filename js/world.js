@@ -1,7 +1,7 @@
 import { addLoadingAnimation } from "./modules/_loader.js";
 import { checkAndCreateSection, imgErroFix } from "./modules/_utils.js";
 
-let worldCategories = ["buisness", "sports", "weather", "science", "technology", "entertainment", "health"];
+let worldCategories = ["sports", "weather", "science", "technology", "entertainment", "health", "finance"];
 
 export function loadWorldPage() {
     const className = `world-news-container`;
